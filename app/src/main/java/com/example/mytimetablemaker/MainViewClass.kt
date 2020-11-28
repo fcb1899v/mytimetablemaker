@@ -1,7 +1,6 @@
 package com.example.mytimetablemaker
 
 import android.content.SharedPreferences
-import android.graphics.Color.parseColor
 import android.text.format.DateFormat.getBestDateTimePattern
 import android.widget.Button
 import androidx.preference.PreferenceManager
@@ -28,14 +27,14 @@ class MainView {
 
     //開始ボタンおよび停止ボタンを押したときの表示変更をする関数
     fun changeStartStop(button1: Button, button2: Button, timeflag: Boolean): Boolean {
-        button1.setTextColor(parseColor(R.string.coloraccent.strings))
-        button2.setTextColor(parseColor(R.string.lightgray.strings))
+        button1.setTextColor(R.string.coloraccent.setColor)
+        button2.setTextColor(R.string.lightgray.setColor)
         return !timeflag
     }
     //帰宅ボタンおよび外出ボタンを押したときの表示変更をする関数
     fun changeGoBack(button1: Button, button2: Button, timeflag: Boolean): Boolean {
-        button1.setTextColor(parseColor(R.string.primarydark.strings))
-        button2.setTextColor(parseColor(R.string.lightgray.strings))
+        button1.setTextColor(R.string.primarydark.setColor)
+        button2.setTextColor(R.string.lightgray.setColor)
         return !timeflag
     }
 

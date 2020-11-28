@@ -4,7 +4,6 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
-import android.graphics.Color.parseColor
 import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
@@ -12,7 +11,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_timetable.*
+import com.example.mytimetablemaker.databinding.ActivityTimetableBinding
 import java.io.InputStream
 
 class TimetableActivity: AppCompatActivity() {
@@ -22,9 +21,13 @@ class TimetableActivity: AppCompatActivity() {
     private var linenumber: Int = 0
     private var currentday: Int = 1
 
+    //ViewBinding
+    private lateinit var binding: ActivityTimetableBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_timetable)
+        binding = ActivityTimetableBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         //フラグメントから受け渡されたデータ
         val intentgoorback = "goorback"
@@ -33,29 +36,28 @@ class TimetableActivity: AppCompatActivity() {
 
         //時刻表の時刻表示のTextViewを配列として初期取得
         var weekdayhour: Array<TextView?> = arrayOf()
-        weekdayhour += arrayOf(findViewById<TextView?>(R.id.weekdayhour04))
-        weekdayhour += arrayOf(findViewById<TextView?>(R.id.weekdayhour05))
-        weekdayhour += arrayOf(findViewById<TextView?>(R.id.weekdayhour06))
-        weekdayhour += arrayOf(findViewById<TextView?>(R.id.weekdayhour07))
-        weekdayhour += arrayOf(findViewById<TextView?>(R.id.weekdayhour08))
-        weekdayhour += arrayOf(findViewById<TextView?>(R.id.weekdayhour09))
-        weekdayhour += arrayOf(findViewById<TextView?>(R.id.weekdayhour10))
-        weekdayhour += arrayOf(findViewById<TextView?>(R.id.weekdayhour11))
-        weekdayhour += arrayOf(findViewById<TextView?>(R.id.weekdayhour12))
-        weekdayhour += arrayOf(findViewById<TextView?>(R.id.weekdayhour13))
-        weekdayhour += arrayOf(findViewById<TextView?>(R.id.weekdayhour14))
-        weekdayhour += arrayOf(findViewById<TextView?>(R.id.weekdayhour15))
-        weekdayhour += arrayOf(findViewById<TextView?>(R.id.weekdayhour16))
-        weekdayhour += arrayOf(findViewById<TextView?>(R.id.weekdayhour17))
-        weekdayhour += arrayOf(findViewById<TextView?>(R.id.weekdayhour18))
-        weekdayhour += arrayOf(findViewById<TextView?>(R.id.weekdayhour19))
-        weekdayhour += arrayOf(findViewById<TextView?>(R.id.weekdayhour20))
-        weekdayhour += arrayOf(findViewById<TextView?>(R.id.weekdayhour21))
-        weekdayhour += arrayOf(findViewById<TextView?>(R.id.weekdayhour22))
-        weekdayhour += arrayOf(findViewById<TextView?>(R.id.weekdayhour23))
-        weekdayhour += arrayOf(findViewById<TextView?>(R.id.weekdayhour24))
-        weekdayhour += arrayOf(findViewById<TextView?>(R.id.weekdayhour25))
-
+        weekdayhour += arrayOf(binding.weekdayhour04)
+        weekdayhour += arrayOf(binding.weekdayhour05)
+        weekdayhour += arrayOf(binding.weekdayhour06)
+        weekdayhour += arrayOf(binding.weekdayhour07)
+        weekdayhour += arrayOf(binding.weekdayhour08)
+        weekdayhour += arrayOf(binding.weekdayhour09)
+        weekdayhour += arrayOf(binding.weekdayhour10)
+        weekdayhour += arrayOf(binding.weekdayhour11)
+        weekdayhour += arrayOf(binding.weekdayhour12)
+        weekdayhour += arrayOf(binding.weekdayhour13)
+        weekdayhour += arrayOf(binding.weekdayhour14)
+        weekdayhour += arrayOf(binding.weekdayhour15)
+        weekdayhour += arrayOf(binding.weekdayhour16)
+        weekdayhour += arrayOf(binding.weekdayhour17)
+        weekdayhour += arrayOf(binding.weekdayhour18)
+        weekdayhour += arrayOf(binding.weekdayhour19)
+        weekdayhour += arrayOf(binding.weekdayhour20)
+        weekdayhour += arrayOf(binding.weekdayhour21)
+        weekdayhour += arrayOf(binding.weekdayhour22)
+        weekdayhour += arrayOf(binding.weekdayhour23)
+        weekdayhour += arrayOf(binding.weekdayhour24)
+        weekdayhour += arrayOf(binding.weekdayhour25)
         //フラグメントから渡されたデータ
         intent?.apply {
             goorback = getStringExtra(intentgoorback).toString()
@@ -72,14 +74,14 @@ class TimetableActivity: AppCompatActivity() {
         val linename: String = goorback.lineName(linenumber, "${R.string.line.strings}${linenumber + 1}")
         val arrivestation: String = goorback.arriveStation(linenumber, "${R.string.arrsta.strings}${linenumber + 1}")
         val timetabletitle: String = linename.timeTableTitle(arrivestation)
-        timetablestationname.text = departstation
-        timetablestationname2.text = timetabletitle
+        binding.timetablestationname.text = departstation
+        binding.timetablestationname2.text = timetabletitle
 
         //平日または土日の表示
-        tablelineweekday.text = currentday.dayOrEndString(getString(R.string.weekend), getString(R.string.weekday))
-        tablelineweekday.setTextColor(currentday.dayOrEndColor(Color.RED, Color.WHITE))
-        daybutton.text = currentday.dayOrEndString(getString(R.string.weekday), getString(R.string.weekend))
-        daybutton.setTextColor(currentday.dayOrEndColor(parseColor(R.string.primarydark.strings), Color.RED))
+        binding.tablelineweekday.text = currentday.dayOrEndString(getString(R.string.weekend), getString(R.string.weekday))
+        binding.tablelineweekday.setTextColor(currentday.dayOrEndColor(Color.RED, Color.WHITE))
+        binding.daybutton.text = currentday.dayOrEndString(R.string.weekday.strings, R.string.weekend.strings)
+        binding.daybutton.setTextColor(currentday.dayOrEndColor(R.string.primarydark.setColor, Color.RED))
 
         val timetable = Timetable()
 
@@ -88,17 +90,17 @@ class TimetableActivity: AppCompatActivity() {
         for (i: Int in 0..21) { weekdayhour[i]?.text = timetablearray[i] }
 
         //平日と土日祝の表示の切替
-        daybutton.setOnClickListener {
-            when (daybutton.text) {
+        binding.daybutton.setOnClickListener {
+            when (binding.daybutton.text) {
                 getString(R.string.weekday) -> {
-                    timetable.getTimetableText(tablelineweekday, 1)
-                    timetable.getTimetableButton(daybutton, 1)
+                    timetable.getTimetableText(binding.tablelineweekday, 1)
+                    timetable.getTimetableButton(binding.daybutton, 1)
                     val timetablechange: Array<String> = timetable.getTimetableStringArray(goorback, linenumber, 1)
                     for (i: Int in 0..21) { weekdayhour[i]?.text = timetablechange[i] }
                 }
                 else -> {
-                    timetable.getTimetableText(tablelineweekday, 0)
-                    timetable.getTimetableButton(daybutton, 0)
+                    timetable.getTimetableText(binding.tablelineweekday, 0)
+                    timetable.getTimetableButton(binding.daybutton, 0)
                     val timetablechange: Array<String> = timetable.getTimetableStringArray(goorback, linenumber, 0)
                     for (i: Int in 0..21) { weekdayhour[i]?.text = timetablechange[i] }
                 }
@@ -108,12 +110,12 @@ class TimetableActivity: AppCompatActivity() {
         //時刻表の時刻の設定
         for (i: Int in 0..21) {
             weekdayhour[i]?.setOnClickListener {
-                val daynumber: Int = when (daybutton.text) { getString(R.string.weekday) -> 0 else -> 1 }
+                val daynumber: Int = when (binding.daybutton.text) { getString(R.string.weekday) -> 0 else -> 1 }
                 timetable.makeTimetableDialog (weekdayhour[i]!!, this, goorback, linenumber, i + 4, daynumber, weekdayhour)
             }
         }
 
-        val pictureselectbutton: Button = findViewById(R.id.pictureselectbutton)
+        val pictureselectbutton: Button = binding.pictureselectbutton
         pictureselectbutton.setOnClickListener {
             val intent: Intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply{
                 addCategory(Intent.CATEGORY_OPENABLE)
@@ -138,7 +140,7 @@ class TimetableActivity: AppCompatActivity() {
                     data?.data?.also { uri: Uri ->
                         val inputStream: InputStream? = contentResolver?.openInputStream(uri)
                         val picture: Bitmap = BitmapFactory.decodeStream(inputStream)
-                        val pictureview: ImageView = findViewById(R.id.PictureView)
+                        val pictureview: ImageView = binding.PictureView
                         pictureview.setImageBitmap(picture)
                     }
                 } catch (e: Exception) {

@@ -224,4 +224,31 @@
     <string name="picturebutton">時刻表写真の選択表示</string>
     <string name="timetablehint">0～59[分]を入力：半角スペース区切り</string>
 
+    //
+    <string name="account">アカウント</string>
+    <string name="sign_in">ログイン</string>
+    <string name="sign_out">ログアウト</string>
+    <string name="logging_in">ログイン中</string>
+    <string name="logged_out">ログアウト中</string>
+    <string name="signed_out">ログアウトしました</string>
+    <string name="create_account">新規登録</string>
+    <string name="verify_email">アカウント確認</string>
+    <string name="deleteaccount">アカウントの削除</string>
+    <string name="forget_password">パスワードを忘れた場合</string>
+    <string name="reset_password">パスワードをリセットしますか？</string>
+    <string name="sent_reset_mail">再設定メールを送信しました</string>
+    <string name="failed_to_sent_reset_mail">再設定メールを送信できませんでした</string>
+    <string name="sent_authmail">認証メールを送信しました</string>
+    <string name="failed_to_sent_authmail">認証メールを送信できませんでした</string>
+    <string name="created_your_account">アカウントを登録しました</string>
+    <string name="failed_to_creat_account">アカウント登録に失敗しました</string>
+    <string name="delete_your_account">アカウントを削除しました</string>
+    <string name="failed_to_delete_account">アカウント削除に失敗しました</string>
+    <string name="hint_email">Eメールアドレスを入力します</string>
+    <string name="hint_password">パスワードを入力します</string>
+    <string name="auth_successed">ログインしました</string>
+    <string name="auth_failed">ログインに失敗しました</string>
+    <string name="auth_mail_check">認証メールを確認してください</string>
+
+
 </resources>

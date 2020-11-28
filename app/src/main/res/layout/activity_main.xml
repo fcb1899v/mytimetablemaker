@@ -83,93 +83,64 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/currentDateLayout">
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/backbutton"
-                style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorWhite"
-                android:fontFamily="sans-serif"
-                android:gravity="center"
-                android:orientation="horizontal"
                 android:text="@string/switchback"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                app:cornerRadius="15dp"
                 app:layout_constraintBottom_toBottomOf="@+id/switchbox"
                 app:layout_constraintStart_toStartOf="@+id/switchbox"
-                app:layout_constraintTop_toTopOf="@+id/switchbox"
-                app:strokeColor="@color/colorPrimaryDark"
-                app:strokeWidth="3dp" />
+                app:layout_constraintTop_toTopOf="@+id/switchbox" />
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/gobutton"
-                style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorWhite"
-                android:fontFamily="sans-serif"
-                android:gravity="center"
-                android:orientation="horizontal"
                 android:text="@string/switchgo"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
                 android:textColor="@color/colorLightGray"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                app:cornerRadius="15dp"
                 app:layout_constraintBottom_toBottomOf="@+id/switchbox"
                 app:layout_constraintStart_toEndOf="@+id/switchtext"
-                app:layout_constraintTop_toTopOf="@+id/switchbox"
-                app:strokeColor="@color/colorPrimaryDark"
-                app:strokeWidth="3dp" />
+                app:layout_constraintTop_toTopOf="@+id/switchbox" />
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/timestartbutton"
-                style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorWhite"
-                android:fontFamily="sans-serif"
-                android:gravity="center"
-                android:orientation="horizontal"
                 android:text="@string/timestart"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
                 android:textColor="@color/colorAccent"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                app:cornerRadius="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/switchbutton"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/timestopbutton"
-                style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorWhite"
-                android:fontFamily="sans-serif"
-                android:gravity="center"
-                android:orientation="horizontal"
                 android:text="@string/timestop"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
                 android:textColor="@color/colorLightGray"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                app:cornerRadius="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/switchbox"
-                app:layout_constraintStart_toEndOf="@+id/timebutton"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </LinearLayout>

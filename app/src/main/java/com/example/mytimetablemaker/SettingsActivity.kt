@@ -3,12 +3,17 @@ package com.example.mytimetablemaker
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.example.mytimetablemaker.databinding.ActivitySettingsBinding
 
 class SettingsActivity: AppCompatActivity() {
 
+    //ViewBinding
+    private lateinit var binding: ActivitySettingsBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_settings)
+        binding = ActivitySettingsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         supportFragmentManager.beginTransaction()
                 .replace(R.id.main_settings, SettingsFragment())

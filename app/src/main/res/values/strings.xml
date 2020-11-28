@@ -58,7 +58,6 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
 
-
     //Main Activity
     <string name="app_name">My Transit Makers</string>
     <string name="switchback">Back</string>
@@ -214,7 +213,7 @@
         <item>Car</item>
     </string-array>
 
-    //時刻表の設定
+    //Timetable Settings
     <string name="timetablesetting">Set up timetable</string>
     <string name="koron">for</string>
     <string name="houmen"> </string>
@@ -222,5 +221,31 @@
     <string name="otherrouteline">Other route of Line</string>
     <string name="picturebutton">Select your timetable picture</string>
     <string name="timetablehint">Enter 0～59 [min] separated by a space</string>
+
+    //
+    <string name="account">Account</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="logging_in">Logging in</string>
+    <string name="logged_out">Logged out</string>
+    <string name="create_account">Create Account</string>
+    <string name="signed_out">Signed Out</string>
+    <string name="created_your_account">Created your account</string>
+    <string name="deleteaccount">Delete your account</string>
+    <string name="forget_password">Forget your password</string>
+    <string name="reset_password">パスワードリセットしますか？</string>
+    <string name="sent_reset_mail">Sent a password reset mail</string>
+    <string name="failed_to_sent_reset_mail">Failed to send a password reset mail</string>
+    <string name="failed_to_creat_account">Failed to create your account</string>
+    <string name="sent_authmail">Sent　an　authentication　email</string>
+    <string name="failed_to_sent_authmail">Failed to sent　an　authentication　email</string>
+    <string name="delete_your_account">Deleted your account</string>
+    <string name="failed_to_delete_account">Failed to delete your account</string>
+    <string name="verify_email">Verify your account</string>
+    <string name="hint_email">Enter your email address</string>
+    <string name="hint_password">Enter your password</string>
+    <string name="auth_failed">Authentication failed</string>
+    <string name="auth_successed">Authentication successed</string>
+    <string name="auth_mail_check">Check an authentication mail</string>
 
 </resources>

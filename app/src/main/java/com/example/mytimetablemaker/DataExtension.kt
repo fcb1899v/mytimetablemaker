@@ -1,6 +1,7 @@
 package com.example.mytimetablemaker
 
 import android.content.Context
+import android.graphics.Color.parseColor
 import androidx.preference.PreferenceManager
 import com.example.mytimetablemaker.Application.Companion.context
 
@@ -16,16 +17,18 @@ class Application: android.app.Application() {
 val Int.strings: String get() = context.getString(this)
 //
 val Int.arrayStrings: Array<String> get() = context.resources.getStringArray(this)
+//
+val Int.setColor: Int get() = parseColor(this.strings)
 
 //SharedPreferenceに保存された値を取得:key
 fun String.savedText(defaulttext: String): String = when (val edittext: String? =
-        PreferenceManager.getDefaultSharedPreferences(context).getString(this, defaulttext)) {
+    PreferenceManager.getDefaultSharedPreferences(context).getString(this, defaulttext)) {
     "", "未設定", "Not set", null -> defaulttext
     else -> edittext.toString()
 }
 //SharedPreferenceに保存された値を取得:key
 val String.savedInt: Int get() = when (val edittextintornull: Int? =
-        PreferenceManager.getDefaultSharedPreferences(context).getString(this, "0")?.toIntOrNull()) {
+    PreferenceManager.getDefaultSharedPreferences(context).getString(this, "0")?.toIntOrNull()) {
     null -> 0
     else -> edittextintornull
 }
@@ -83,7 +86,8 @@ val String.otherGoOrBack: String get() = when (this) {
     "back2" -> "back1"
     "go2" -> "go1"
     else -> "back2"
-}//:goorback
+}
+//:goorback
 fun String.transitStation(i: Int): String = when (i) {
     0 -> this.arrivePoint(R.string.office.strings, R.string.home.strings)
     1 -> this.departPoint(R.string.office.strings, R.string.home.strings)
@@ -91,6 +95,7 @@ fun String.transitStation(i: Int): String = when (i) {
 }
 //
 fun String.changeWord(changeword: String, i: Int):String = when (i) {0 -> this else -> changeword }
+
 //
 val Int.e:String get() = when (this) {
     0-> "e"

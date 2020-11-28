@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "36557457735",
+    "firebase_url": "https://app-mytimetablemaker.firebaseio.com",
+    "project_id": "app-mytimetablemaker",
+    "storage_bucket": "app-mytimetablemaker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:36557457735:android:17667e31f15596670d2462",
+        "android_client_info": {
+          "package_name": "com.mytimetablemaker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "36557457735-evme4i2n6rlsaud58t51eo18od81m44h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCihYpPon06yc1tUvPqtTwfFxe91ro0cxU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "36557457735-evme4i2n6rlsaud58t51eo18od81m44h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "36557457735-plf72d7ftp5sfullfhac10giqhb5g861.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "Personal.mytimetablemaker"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -116,7 +116,7 @@ class CalcTime(val goorback: String, private val changeline: Int, private val cu
             LTGRAY
         } else {
             when (countdownmm) {
-                in 11..99 -> { parseColor(R.string.coloraccent.strings) }
+                in 11..99 -> { R.string.coloraccent.setColor }
                 in 6..10 -> { YELLOW }
                 in 0..5 -> { RED }
                 else -> { LTGRAY }

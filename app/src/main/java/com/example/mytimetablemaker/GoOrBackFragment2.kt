@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.mytimetablemaker.databinding.FragmentGoorback2Binding
 
 class GoOrBack2Fragment : Fragment() {
 
@@ -23,69 +24,51 @@ class GoOrBack2Fragment : Fragment() {
     //クラスの呼び出し
     private val mainfragment = MainFragment()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    //ViewBinding
+    private lateinit var binding: FragmentGoorback2Binding
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = FragmentGoorback2Binding.inflate(layoutInflater, container, false)
 
         //表示する出発地名・目的地名のTextViewの設定
-        val departurepointview: TextView? = view.findViewById<TextView?>(R.id.stationName120)
-        val arrivalpointview: TextView? = view.findViewById<TextView?>(R.id.stationName12e)
+        val departurepointview2: TextView = binding.stationName120
+        val arrivalpointview2: TextView = binding.stationName12e
 
         //表示する乗車駅名のTextViewの設定
-        var departstationview: Array<TextView?> = arrayOf()
-        departstationview += view.findViewById<TextView?>(R.id.stationName121)
-        departstationview += view.findViewById<TextView?>(R.id.stationName123)
-        departstationview += view.findViewById<TextView?>(R.id.stationName125)
+        val departstationview2: Array<TextView> =
+            arrayOf(binding.stationName121, binding.stationName123, binding.stationName125)
 
         //表示する降車駅名のTextViewの設定
-        var arrivestationview: Array<TextView?> = arrayOf()
-        arrivestationview += view.findViewById<TextView?>(R.id.stationName122)
-        arrivestationview += view.findViewById<TextView?>(R.id.stationName124)
-        arrivestationview += view.findViewById<TextView?>(R.id.stationName126)
+        val arrivestationview2: Array<TextView> =
+            arrayOf(binding.stationName122, binding.stationName124, binding.stationName126)
 
         //表示する路線名のTextViewの設定
-        var linenameview: Array<TextView?> = arrayOf()
-        linenameview += view.findViewById<TextView?>(R.id.lineName121)
-        linenameview += view.findViewById<TextView?>(R.id.lineName123)
-        linenameview += view.findViewById<TextView?>(R.id.lineName125)
+        val linenameview2: Array<TextView> =
+            arrayOf(binding.lineName121, binding.lineName123, binding.lineName125)
 
         //表示する路線のViewの設定
-        var linelineview: Array<View?> = arrayOf()
-        linelineview += view.findViewById<View?>(R.id.lineLine121)
-        linelineview += view.findViewById<View?>(R.id.lineLine123)
-        linelineview += view.findViewById<View?>(R.id.lineLine125)
+        val linelineview2: Array<View> =
+            arrayOf(binding.lineLine121, binding.lineLine123, binding.lineLine125)
 
         //表示する移動手段方法のTextViewの設定
-        var transportview: Array<TextView?> = arrayOf()
-        transportview += view.findViewById<TextView?>(R.id.lineName12e)
-        transportview += view.findViewById<TextView?>(R.id.lineName120)
-        transportview += view.findViewById<TextView?>(R.id.lineName122)
-        transportview += view.findViewById<TextView?>(R.id.lineName124)
+        val transportview2: Array<TextView> =
+            arrayOf(binding.lineName12e, binding.lineName120, binding.lineName122, binding.lineName124)
 
         //表示する移動手段のViewの設定
-        var transitline: Array<View?> = arrayOf()
-        transitline += view.findViewById<View?>(R.id.lineLine12e)
-        transitline += view.findViewById<View?>(R.id.lineLine120)
-        transitline += view.findViewById<View?>(R.id.lineLine122)
-        transitline += view.findViewById<View?>(R.id.lineLine124)
+        val transitline2: Array<View> =
+            arrayOf(binding.lineLine12e, binding.lineLine120, binding.lineLine122, binding.lineLine124)
 
         //表示するレイアウトの設定
-        var layoutview: Array<LinearLayout?> = arrayOf()
-        layoutview += view.findViewById<LinearLayout?>(R.id.linearlayout122)
-        layoutview += view.findViewById<LinearLayout?>(R.id.linearlayout123)
+        val layoutview2: Array<LinearLayout> =
+            arrayOf(binding.linearlayout122, binding.linearlayout123)
 
         //表示する時刻のTextViewの設定
-        var timeview: Array<TextView?> = arrayOf()
-        timeview += view.findViewById<TextView?>(R.id.startTime120)
-        timeview += view.findViewById<TextView?>(R.id.startTime12e)
-        timeview += view.findViewById<TextView?>(R.id.startTime121)
-        timeview += view.findViewById<TextView?>(R.id.startTime122)
-        timeview += view.findViewById<TextView?>(R.id.startTime123)
-        timeview += view.findViewById<TextView?>(R.id.startTime124)
-        timeview += view.findViewById<TextView?>(R.id.startTime125)
-        timeview += view.findViewById<TextView?>(R.id.startTime126)
+        val timeview2: Array<TextView> =
+            arrayOf(binding.startTime120, binding.startTime12e, binding.startTime121, binding.startTime122,
+                binding.startTime123, binding.startTime124, binding.startTime125, binding.startTime126)
 
         //表示するカウントダウンのTextViewの設定
-        val countdownview: TextView? = view.findViewById<TextView?>(R.id.countdown12)
+        val countdownview2: TextView = binding.countdown12
 
         //MainActivityから渡されたデータ
         val currentday: Int = currentday
@@ -93,8 +76,10 @@ class GoOrBack2Fragment : Fragment() {
         val goorback2: String = goorback2
 
         mainfragment.mainFun(requireContext(), currentday, currenthhmmss, goorback2,
-            departurepointview, departstationview, arrivestationview, arrivalpointview,
-            linenameview, linelineview, transportview, transitline, layoutview, timeview, countdownview)
+            departurepointview2, departstationview2, arrivestationview2, arrivalpointview2,
+            linenameview2, linelineview2, transportview2, transitline2, layoutview2, timeview2, countdownview2)
+
+        return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -104,10 +89,6 @@ class GoOrBack2Fragment : Fragment() {
             currenthhmmss = it.getInt(ARG_currenthhmmss)
             goorback2 = it.getString(ARG_goorback2)!!
         }
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_goorback2, container, false)
     }
 
     companion object {
@@ -121,47 +102,3 @@ class GoOrBack2Fragment : Fragment() {
         }
     }
 }
-
-/*
-//＜時刻表に関するJSONファイルの取得＞
-//設定用JSONファイルの読込み
-val readsettingfile: String = fileanddata.readJSONFile(context!!.filesDir, "setting.json")
-//読込みたいJSONファイルのリスト
-val jsonfile: Array<String> = fileanddata.makeJSONFileArray(goorback, changeline)
-//時刻表に関するJSONファイルの読込み
-val readjsonfile: Array<String> = fileanddata.readJSONFileArray(context!!.filesDir, jsonfile)
-//時刻表
-val timetable: Array<Array<Int>> = dateandtime.getTimetableArrayFromJson(readjsonfile, currentday)
-//乗換時間
-val walktime: Array<Int> = dateandtime.getWalkTimeArray(readsettingfile, goorback)
-//乗車時間
-val ridetime: Array<Int> = fileanddata.getSettingIntArray(readjsonfile, "ridetime")
-
-//東海道線対応
-val backtoukaidouridetime = 77 //東海道線の乗車時間
-val backslasttime = 2255       //新幹線の終電時間
-val backtlasttime = 2404       //東海道線の終電時間
-if (changeline > 1) {
-    if (time[2][0] in backslasttime + 1..backtlasttime) {
-        time[2][2] += backtoukaidouridetime - ridetime[2]
-    }
-}
-
-//京浜東北線対応
-if (changeline > 0) {
-val yamanotekeihintohokulinename = "JR山手線/京浜東北線"
-linename3!!.text = yamanotekeihintohokulinename
-lineline3!!.setBackgroundResource(R.drawable.gradient_color)
-}
-//東海道線対応
-if (changeline > 1) {
-val toukaidoulinename = "JR東海道線"
-val toukaidoulinecolor = "#F68B1E"
-if (time[2][0] in backslasttime + 1..backtlasttime) {
-linename5!!.text = toukaidoulinename
-linename5.setTextColor(Color.parseColor(toukaidoulinecolor))
-lineline5!!.setBackgroundColor(Color.parseColor(toukaidoulinecolor))
-}
-}
-*/
-

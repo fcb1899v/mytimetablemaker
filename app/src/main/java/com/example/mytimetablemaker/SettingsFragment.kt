@@ -1,84 +1,79 @@
 package com.example.mytimetablemaker
 
-import android.annotation.SuppressLint
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.Switch
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import com.example.mytimetablemaker.databinding.FragmentSettingsBinding
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class SettingsFragment : Fragment() {
 
     //クラスの呼び出し
+    private val emailauth = EmailAuth(Firebase.auth)
     private val setting = Setting()
 
-    //バージョン
-    //private val versionCodes: Int = BuildConfig.VERSION_CODE
-    private val versionName: String = BuildConfig.VERSION_NAME
+    //ViewBinding
+    private lateinit var binding: FragmentSettingsBinding
 
-    @SuppressLint("UseSwitchCompatOrMaterialCode", "UseRequireInsteadOfGet")
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = FragmentSettingsBinding.inflate(layoutInflater, container, false)
 
         //goorbackの設定
         val goorbackarray: Array<String> = arrayOf("back1", "go1", "back2", "go2")
 
         //乗換回数設定のボタンとしてのTextView
-        var changelinebutton: Array<TextView?> = arrayOf()
-        changelinebutton += view.findViewById<TextView?>(R.id.back1changelinebutton)
-        changelinebutton += view.findViewById<TextView?>(R.id.go1changelinebutton)
-        changelinebutton += view.findViewById<TextView?>(R.id.back2changelinebutton)
-        changelinebutton += view.findViewById<TextView?>(R.id.go2changelinebutton)
+        val changelinebutton: Array<TextView> = arrayOf(
+            binding.back1changelinebutton, binding.go1changelinebutton,
+            binding.back2changelinebutton, binding.go2changelinebutton)
 
         //設定した乗換回数を表示するTextView
-        var changelinetext: Array<TextView?> = arrayOf()
-        changelinetext += view.findViewById<TextView?>(R.id.back1changelinetext)
-        changelinetext += view.findViewById<TextView?>(R.id.go1changelinetext)
-        changelinetext += view.findViewById<TextView?>(R.id.back2changelinetext)
-        changelinetext += view.findViewById<TextView?>(R.id.go2changelinetext)
-
-        //乗換回数設定のLinearLayout
-        val back2changelinelayout: LinearLayout? = view.findViewById(R.id.back2changelinelayout)
-        val go2changelinelayout: LinearLayout? = view.findViewById(R.id.go2changelinelayout)
+        val changelinetext: Array<TextView> = arrayOf(
+            binding.back1changelinetext, binding.go1changelinetext,
+            binding.back2changelinetext, binding.go2changelinetext)
 
         //表示する路線名のTextViewの設定
-        var varioussettingbutton: Array<TextView?> = arrayOf()
-        varioussettingbutton += view.findViewById<TextView?>(R.id.back1settingbutton)
-        varioussettingbutton += view.findViewById<TextView?>(R.id.go1settingbutton)
-        varioussettingbutton += view.findViewById<TextView?>(R.id.back2settingbutton)
-        varioussettingbutton += view.findViewById<TextView?>(R.id.go2settingbutton)
+        val varioussettingbutton: Array<TextView> = arrayOf(
+            binding.back1settingbutton, binding.go1settingbutton,
+            binding.back2settingbutton, binding.go2settingbutton)
 
-        //各種設定のLinearLayout
-        val back2settinglayout: LinearLayout? = view.findViewById(R.id.back2settinglayout)
-        val go2settinglayout: LinearLayout? = view.findViewById(R.id.go2settinglayout)
+        //スイッチの状態を表示
+        binding.back2switch.isChecked = MainView().getRoot2Boolean("back2switch", false)
+        binding.go2switch.isChecked = MainView().getRoot2Boolean("go2switch", false)
 
-        //ルート2を表示・非表示するSwitchの設定
-        val back2switch: Switch? = view.findViewById(R.id.back2switch)
-        val go2switch: Switch? = view.findViewById(R.id.go2switch)
+        //スイッチの状態に応じて表示を変更
+        binding.back2changelinelayout.isVisible = binding.back2switch.isChecked
+        binding.go2changelinelayout.isVisible = binding.go2switch.isChecked
+        binding.back2settinglayout.isVisible = binding.back2switch.isChecked
+        binding.go2settinglayout.isVisible = binding.go2switch.isChecked
 
-        //バージョンの表示
-        val versiontext: TextView? = view.findViewById(R.id.versionnumber)
-        versiontext!!.text = versionName
-
-        //リンク
-        val privacypolicy: TextView? = view.findViewById(R.id.privacypolicy)
+        //スイッチの変更による表示の変更
+        binding.back2switch.setOnCheckedChangeListener { _, isChecked: Boolean ->
+            setting.prefSaveBoolean(requireContext(), "back2switch", isChecked)
+            binding.back2changelinelayout.isVisible = isChecked
+            binding.back2settinglayout.isVisible = isChecked
+        }
+        binding.back2switch.setOnCheckedChangeListener { _, isChecked: Boolean ->
+            setting.prefSaveBoolean(requireContext(), "go2switch", isChecked)
+            binding.go2changelinelayout.isVisible = isChecked
+            binding.go2settinglayout.isVisible = isChecked
+        }
 
         for (i in 0..3) {
             //乗換回数の表示
-            changelinetext[i]!!.text = goorbackarray[i].changeLineString
+            changelinetext[i].text = goorbackarray[i].changeLineString
             ////乗換回数の変更
-            changelinebutton[i]!!.setOnClickListener {
-                setting.setChangeLineDialog(changelinetext[i]!!, context!!, goorbackarray[i])
-                changelinetext[i]!!.text = goorbackarray[i].changeLineString
+            changelinebutton[i].setOnClickListener {
+                setting.setChangeLineDialog(changelinetext[i], requireContext(), goorbackarray[i])
+                changelinetext[i].text = goorbackarray[i].changeLineString
             }
             ////乗換回数の変更
-            varioussettingbutton[i]!!.setOnClickListener {
+            varioussettingbutton[i].setOnClickListener {
                 val title: String = goorbackarray[i].variousSettingsTitle
                 val bundle = Bundle()
                 bundle.putString("BUNDLE_KEY_GOORBACK", goorbackarray[i])
@@ -91,22 +86,22 @@ class SettingsFragment : Fragment() {
             }
         }
 
-        //スイッチの表示・変更
-        setting.display2Switch(back2switch!!, "back2switch", false, back2changelinelayout!!, back2settinglayout!!)
-        setting.display2Switch(go2switch!!, "go2switch", false, go2changelinelayout!!, go2settinglayout!!)
+        //データの保存
+        //val db = FirebaseFirestore.getInstance()
 
-        //利用規約・プライバシーポリシーに移動
-        privacypolicy!!.setOnClickListener {
-            val url = "https://landingpage-mytimetablemaker.web.app/privacypolicy.html"
-            startActivity(Intent(Intent.ACTION_VIEW).apply{
-                data = Uri.parse(url)
-            })
-        }
+        //サインアウト
+        binding.signoutbutton.setOnClickListener { startActivity(emailauth.intentSignOut()) }
 
-    }
+        //アカウントの削除
+        binding.deleteaccountbutton.setOnClickListener { startActivity(emailauth.intentDeleteAccount()) }
 
-    override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+        //利用規約・プライバシーポリシー
+        binding.privacypolicy.setOnClickListener { startActivity(emailauth.intentPrivacyPolicy()) }
+
+        //バージョンの表示
+        binding.versionnumber.text = BuildConfig.VERSION_NAME
+        //private val versionCodes: Int = BuildConfig.VERSION_CODE
+
+        return binding.root
     }
 }

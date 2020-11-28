@@ -3,13 +3,11 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_weight="1"
     android:background="@color/colorPrimary"
-    ads:layout_gravity="right|center_vertical"
     tools:context=".TimetableActivity">
 
     <ScrollView
@@ -77,10 +75,9 @@
                             tools:ignore="NestedWeights,UnusedAttribute" />
                     </LinearLayout>
 
-                    <com.google.android.material.button.MaterialButton
+                    <Button
                         android:id="@+id/daybutton"
-                        style="@style/Widget.MaterialComponents.Button"
-                        android:layout_width="80dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="15dp"
@@ -89,11 +86,9 @@
                         android:fontFamily="sans-serif"
                         android:orientation="horizontal"
                         android:text="@string/weekend"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
                         android:textColor="@color/ColorRed"
                         android:textSize="15sp"
-                        android:textStyle="bold"
-                        ads:cornerRadius="15dp" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -899,8 +894,8 @@
                     tools:ignore="TooManyViews" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@color/colorPrimary"
                     android:orientation="horizontal"
@@ -915,18 +910,18 @@
                         android:backgroundTint="@color/colorPrimary"
                         tools:ignore="NestedWeights" />
 
-                    <com.google.android.material.button.MaterialButton
+                    <Button
                         android:id="@+id/pictureselectbutton"
-                        android:layout_width="200dp"
-                        android:layout_height="60dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:background="@color/colorAccent"
                         android:gravity="center"
                         android:orientation="horizontal"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
                         android:text="@string/picturebutton"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
                         android:textColor="@color/colorWhite"
-                        android:textSize="15sp"
-                        app:cornerRadius="10dp" />
+                        android:textSize="15sp" />
 
                     <View
                         android:id="@+id/view4"
