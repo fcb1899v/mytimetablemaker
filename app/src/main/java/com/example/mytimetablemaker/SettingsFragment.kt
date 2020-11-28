@@ -58,7 +58,7 @@ class SettingsFragment : Fragment() {
             binding.back2changelinelayout.isVisible = isChecked
             binding.back2settinglayout.isVisible = isChecked
         }
-        binding.back2switch.setOnCheckedChangeListener { _, isChecked: Boolean ->
+        binding.go2switch.setOnCheckedChangeListener { _, isChecked: Boolean ->
             setting.prefSaveBoolean(requireContext(), "go2switch", isChecked)
             binding.go2changelinelayout.isVisible = isChecked
             binding.go2settinglayout.isVisible = isChecked
