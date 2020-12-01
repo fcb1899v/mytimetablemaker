@@ -249,6 +249,13 @@
     <string name="auth_successed">ログインしました</string>
     <string name="auth_failed">ログインに失敗しました</string>
     <string name="auth_mail_check">認証メールを確認してください</string>
+    <string name="save_data_to_server">サーバーにデータ保存</string>
+    <string name="successed_to_save_data">データ保存に成功しました</string>
+    <string name="failed_to_save_data">データ保存に失敗しました</string>
+    <string name="get_data_from_server">サーバーからデータ取得</string>
+    <string name="successed_to_get_data">データ取得に成功しました</string>
+    <string name="failed_to_get_data">データ取得に失敗しました</string>
+
 
 
 </resources>

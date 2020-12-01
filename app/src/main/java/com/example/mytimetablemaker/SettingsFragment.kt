@@ -12,20 +12,21 @@ import com.example.mytimetablemaker.databinding.FragmentSettingsBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
+
+@Suppress("UNREACHABLE_CODE")
 class SettingsFragment : Fragment() {
 
     //クラスの呼び出し
     private val emailauth = EmailAuth(Firebase.auth)
     private val setting = Setting()
+    private val firebasefirestore = FirebaseFirestore()
+    private val goorbackarray: Array<String> = arrayOf("back1", "go1", "back2", "go2")
 
     //ViewBinding
     private lateinit var binding: FragmentSettingsBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentSettingsBinding.inflate(layoutInflater, container, false)
-
-        //goorbackの設定
-        val goorbackarray: Array<String> = arrayOf("back1", "go1", "back2", "go2")
 
         //乗換回数設定のボタンとしてのTextView
         val changelinebutton: Array<TextView> = arrayOf(
@@ -86,9 +87,6 @@ class SettingsFragment : Fragment() {
             }
         }
 
-        //データの保存
-        //val db = FirebaseFirestore.getInstance()
-
         //サインアウト
         binding.signoutbutton.setOnClickListener { startActivity(emailauth.intentSignOut()) }
 
@@ -101,6 +99,17 @@ class SettingsFragment : Fragment() {
         //バージョンの表示
         binding.versionnumber.text = BuildConfig.VERSION_NAME
         //private val versionCodes: Int = BuildConfig.VERSION_CODE
+
+        //サーバー保存
+        binding.saveserverbutton.setOnClickListener {
+            firebasefirestore.saveFirestore()
+        }
+
+        //サーバー保存
+        binding.getserverdatabutton.setOnClickListener {
+            //firebasefirestore.getLineInfoFirestore()
+        }
+
 
         return binding.root
     }

@@ -51,6 +51,8 @@ class EmailAuthActivity : AppCompatActivity() {
 
         //AdMob
         admobclass.setAdMob(binding.topadview, this)
+
+
     }
 
     // サインイン処理

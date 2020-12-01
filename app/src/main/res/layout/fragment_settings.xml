@@ -432,6 +432,48 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/saveserverbutton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:gravity="start|center_vertical"
+                        android:text="@string/save_data_to_server"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="0.3dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/getserverdatabutton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:gravity="start|center_vertical"
+                        android:text="@string/get_data_from_server"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="0.3dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
                         android:id="@+id/signoutbutton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -442,6 +484,7 @@
                         android:textSize="18sp" />
 
                 </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"

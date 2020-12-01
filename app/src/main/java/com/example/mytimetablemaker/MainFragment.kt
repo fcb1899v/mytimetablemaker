@@ -10,6 +10,7 @@ import android.widget.TextView
 class MainFragment {
 
     //クラスの呼び出し
+    private val mainview = MainView()
     private val mainviewdialog = MainViewDialog()
 
     fun mainFun(
@@ -20,29 +21,19 @@ class MainFragment {
         timeview: Array<TextView>, countdownview: TextView) {
 
         //＜設定データの取得・表示＞
-        //乗換回数
+        //乗換回数・出発地・目的地・乗車駅・降車駅・路線名・各路線カラー・移動手段の取得
         val changeline: Int = goorback.changeLine
+        val departpoint: String = goorback.departPoint(R.string.office.strings, R.string.home.strings)
+        val arrivalpoint: String = goorback.arrivePoint(R.string.office.strings, R.string.home.strings)
+        val departstation: Array<String> = mainview.getDepartStation(goorback, changeline)
+        val arrivestation: Array<String> = mainview.getArriveStation(goorback, changeline)
+        val linename: Array<String> = mainview.getLineName(goorback, changeline)
+        val linecolor: Array<String> = mainview.getLineColor(goorback, changeline)
+        val transportation: Array<String> = mainview.getTransportation(goorback, changeline)
 
-        //出発地・目的地の表示
-        departurepointview.text = goorback.departPoint(R.string.office.strings, R.string.home.strings)
-        arrivalpointview.text = goorback.arrivePoint(R.string.office.strings, R.string.home.strings)
-
-        //乗車駅・降車駅・路線名・各路線カラー・移動手段の取得
-        var departstation: Array<String> = arrayOf()
-        var arrivestation: Array<String> = arrayOf()
-        var linename: Array<String> = arrayOf()
-        var linecolor: Array<String> = arrayOf()
-        var transportation: Array<String> = arrayOf()
-        transportation += goorback.transportation(0, R.string.walking.strings)
-        for (i: Int in 0..changeline) {
-            departstation += goorback.departStation(i, "${R.string.depsta.strings}${i + 1}")
-            arrivestation += goorback.arriveStation(i, "${R.string.arrsta.strings}${i + 1}")
-            linename += goorback.lineName(i, "${R.string.line.strings}${i + 1}")
-            linecolor += goorback.lineColor(i,  R.string.coloraccent.strings)
-            transportation += goorback.transportation(i + 1, R.string.walking.strings)
-        }
-
-        //乗車駅・降車駅・路線名・各路線カラー・移動手段の表示
+        //出発地・目的地・乗車駅・降車駅・路線名・各路線カラー・移動手段の表示
+        departurepointview.text = departpoint
+        arrivalpointview.text = arrivalpoint
         transportview[0].text = transportation[0]
         for (i: Int in 0..changeline) {
             departstationview[i].text = if (changeline >= i) {departstation[i]} else {""}

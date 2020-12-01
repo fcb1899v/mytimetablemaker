@@ -1,9 +1,9 @@
 package com.example.mytimetablemaker
 
-import android.content.SharedPreferences
 import android.text.format.DateFormat.getBestDateTimePattern
 import android.widget.Button
 import androidx.preference.PreferenceManager
+import com.example.mytimetablemaker.Application.Companion.context
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -47,12 +47,62 @@ class MainView {
 
     //設定画面のルート2を表示するSwitchPreferenceの状態に応じたBooleanを読み出す関数
     fun getRoot2Boolean(key: String, defaultflag: Boolean): Boolean {
-        val sharedpreference: SharedPreferences =
-                PreferenceManager.getDefaultSharedPreferences(Application.context)
-        return when (val root2switch: Boolean? = sharedpreference.getBoolean(key, defaultflag)) {
-            null -> defaultflag
-            else -> root2switch
-        }
+        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, defaultflag)
     }
 
+    fun getDepartStation (goorback: String, changeline: Int): Array<String> {
+        var departstation: Array<String> = arrayOf()
+        (0 .. changeline).forEach { i: Int ->
+            departstation += goorback.departStation(i, "${R.string.depsta.strings}${i + 1}")
+        }
+        return departstation
+    }
+
+    fun getArriveStation (goorback: String, changeline: Int): Array<String> {
+        var arrivestation: Array<String> = arrayOf()
+        (0 .. changeline).forEach { i: Int ->
+            arrivestation += goorback.arriveStation(i, "${R.string.arrsta.strings}${i + 1}")
+        }
+        return arrivestation
+    }
+
+    fun getLineName (goorback: String, changeline: Int): Array<String> {
+        var linename: Array<String> = arrayOf()
+        (0 .. changeline).forEach { i: Int ->
+            linename += goorback.lineName(i, "${R.string.line.strings}${i + 1}")
+        }
+        return linename
+    }
+
+    fun getLineColor (goorback: String, changeline: Int): Array<String> {
+        var linecolor: Array<String> = arrayOf()
+        (0 .. changeline).forEach { i: Int ->
+            linecolor += goorback.lineColor(i, R.string.coloraccent.strings)
+        }
+        return linecolor
+    }
+
+    fun getTransportation (goorback: String, changeline: Int): Array<String> {
+        var transportation: Array<String> = arrayOf()
+        (0 .. changeline + 1).forEach { i: Int ->
+            transportation += goorback.transportation(i, R.string.walking.strings)
+        }
+        return transportation
+    }
+
+    fun getRideTime (goorback: String, changeline: Int): Array<String> {
+        var ridetime: Array<String> = arrayOf()
+        (0 .. changeline).forEach { i: Int ->
+            ridetime += goorback.rideTime(i, "0")
+        }
+        return ridetime
+    }
+
+    fun getTransitTime (goorback: String, changeline: Int): Array<String> {
+        var transittime: Array<String> = arrayOf()
+        (0 .. changeline + 1).forEach { i: Int ->
+            transittime += goorback.transitTime(i, "0")
+        }
+        return transittime
+    }
 }

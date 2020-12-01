@@ -66,8 +66,9 @@ dependencies {
     //Firebase ユーザー認証
     implementation 'com.google.firebase:firebase-auth:20.0.1'
     implementation 'com.google.firebase:firebase-auth-ktx'
+    //Firebase Database
+    implementation 'com.google.firebase:firebase-database:19.5.1'
+    implementation 'com.google.firebase:firebase-firestore:22.0.0'
     //Firebase UI (Used in FirebaseUIActivity
     implementation 'com.firebaseui:firebase-ui-auth:6.3.0'
-    //Firebase FireStore
-    implementation 'com.google.firebase:firebase-firestore:22.0.0'
 }
