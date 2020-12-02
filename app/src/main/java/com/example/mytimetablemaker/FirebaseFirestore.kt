@@ -2,7 +2,9 @@ package com.example.mytimetablemaker
 
 import android.widget.Toast
 import com.example.mytimetablemaker.Application.Companion.context
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.WriteBatch
 import com.google.firebase.ktx.Firebase
@@ -11,123 +13,180 @@ class FirebaseFirestore {
 
     private val mainview = MainView()
     private val timetable = Timetable()
+    private val setting = Setting()
 
-//    fun getLineInfoFirestore(goorback: String) {
-//        val userid: String = Firebase.auth.currentUser!!.uid
-//        val lineinfo: HashMap<String, String> = hashMapOf()
-//        FirebaseFirestore.getInstance().collection("users").document(userid)
-//            .collection("goorback").document(goorback).get()
-//            .addOnSuccessListener { result ->
-//                forEach (document in result) {
-//                    lineinfo[document.id] = document.data
-//                }
-//                Toast.makeText(context, R.string.successed_to_get_data, Toast.LENGTH_SHORT).show()
-//            }
-//            .addOnFailureListener { Toast.makeText(context, R.string.failed_to_get_data, Toast.LENGTH_SHORT).show() }
-//    }
+    private val userid: String = Firebase.auth.currentUser!!.uid
+    private val userdb =  FirebaseFirestore.getInstance().collection("users").document(userid)
+    private val goorbackarray: Array<String> = arrayOf("back1", "go1", "back2", "go2")
 
-    fun saveFirestore() {
-        val goorbackarray: Array<String> = arrayOf("back1", "go1", "back2", "go2")
-        val batch = FirebaseFirestore.getInstance().batch()
+    fun getFirestore() {
         (0..3).forEach { i: Int ->
-            (1..3).forEach { j: Int ->
-                (0..1).forEach { k: Int ->
-                    saveTimetableFirestore(goorbackarray[i], j, k, batch)
+            (0..2).forEach { linenumber: Int ->
+                (0..1).forEach { day: Int ->
+                    (4..25).forEach { hour: Int ->
+                        getTimetableFireStore(goorbackarray[i], linenumber, day, hour)
+                    }
                 }
             }
-            saveLineInfoFirestore(goorbackarray[i],batch)
+            getLineInfoFirestore(goorbackarray[i])
+        }
+    }
+
+    private fun getLineInfoFirestore(goorback: String) {
+        val ref = userdb.collection("goorback").document(goorback)
+        ref.get().addOnCompleteListener { task: Task<DocumentSnapshot> ->
+                if (task.isSuccessful) {
+                    saveLineInfoToPref(goorback, task)
+                    Toast.makeText(context, R.string.successed_to_get_data, Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, R.string.failed_to_get_data, Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
+    private fun getTimetableFireStore(goorback: String, linenumber: Int, day: Int, hour: Int) {
+        val ref = userdb.collection("goorback").document(goorback)
+        ref.collection("timetable").document("timetable${linenumber + 1}${day.weekDayOrEnd}").get()
+            .addOnCompleteListener { task: Task<DocumentSnapshot> ->
+                if (task.isSuccessful) {
+                    val key  ="${goorback}timetable${linenumber + 1}hour${hour.addZeroTime}${day.weekDayOrEnd}"
+                    setting.prefSaveText(context, key, task.result?.get("hour${hour.addZeroTime}").toString())
+                    Toast.makeText(context, R.string.successed_to_get_data, Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, R.string.failed_to_get_data, Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
+    private fun saveLineInfoToPref(goorback: String, task: Task<DocumentSnapshot>) {
+        setting.prefSaveText(context, "${goorback}changeline", task.result?.get("changeline").toString())
+        setting.prefSaveText(context, goorback.goOrBackString("destination", "departurepoint"), task.result?.get("departpoint").toString())
+        setting.prefSaveText(context, goorback.goOrBackString("departurepoint", "destination"), task.result?.get("arrivalpoint").toString())
+        (1..3).forEach { i: Int ->
+            setting.prefSaveText(context, "${goorback}departstation${i}", task.result?.get("departstation${i}").toString())
+            setting.prefSaveText(context, "${goorback}arrivalstation${i}", task.result?.get("arrivalstation${i}").toString())
+            setting.prefSaveText(context, "${goorback}linename${i}", task.result?.get("linename${i}").toString())
+            setting.prefSaveText(context, "${goorback}linecolor${i}", task.result?.get("linecolor${i}").toString())
+            setting.prefSaveText(context, "${goorback}ridetime${i}", task.result?.get("ridetime${i}").toString())
+            setting.prefSaveText(context, "${goorback}transportation${i}", task.result?.get("transportation${i}").toString())
+            setting.prefSaveText(context, "${goorback}transittime${i}", task.result?.get("transittime${i}").toString())
+        }
+        setting.prefSaveText(context, "${goorback}transportatione", task.result?.get("transportatione").toString())
+        setting.prefSaveText(context, "${goorback}transittimee", task.result?.get("transittimee").toString())
+    }
+
+    fun saveFirestore() {
+        val batch = FirebaseFirestore.getInstance().batch()
+        (0..3).forEach { i: Int ->
+            (0..2).forEach { linenumber: Int ->
+                (0..1).forEach { day: Int ->
+                    saveTimetableFirestore(goorbackarray[i], linenumber, day, batch)
+                }
+            }
+            saveLineInfoFirestore(goorbackarray[i], batch)
         }
         batch.commit()
             .addOnSuccessListener { Toast.makeText(context, R.string.successed_to_save_data, Toast.LENGTH_SHORT).show() }
             .addOnFailureListener { Toast.makeText(context, R.string.failed_to_save_data, Toast.LENGTH_SHORT).show() }
-
     }
 
     private fun saveLineInfoFirestore(goorback: String, batch: WriteBatch){
-        val userid: String = Firebase.auth.currentUser!!.uid
-        val lineinfo = lineInfoHushMap(goorback)
-        val ref = FirebaseFirestore.getInstance().collection("users").document(userid)
-            .collection("goorback").document(goorback)
-        batch.set(ref, lineinfo)
+        val ref = userdb.collection("goorback").document(goorback)
+        batch.set(ref, setLineInfo(goorback))
     }
 
     private fun saveTimetableFirestore(goorback: String, linenumber: Int, day: Int, batch: WriteBatch){
-        val userid: String = Firebase.auth.currentUser!!.uid
-        val timetablearray: Array<String> = timetable.getTimetableStringArray(goorback, linenumber, day)
-        val timetable: HashMap<String, String> = timetableHushMap(timetablearray)
-        val endorday: String = when(day) { 0 -> "weekend" else -> "weekday" }
-        val ref = FirebaseFirestore.getInstance().collection("users").document(userid)
-            .collection("goorback").document(goorback)
-            .collection("timetable").document("timetable${linenumber}${endorday}")
-        batch.set(ref, timetable)
+        val ref = userdb.collection("goorback").document(goorback)
+        val timetablehour: TimetableHour = setTimetableHour(goorback, linenumber, day)
+        val timetableref = ref.collection("timetable").document("timetable${linenumber + 1}${day.weekDayOrEnd}")
+        batch.set(timetableref, timetablehour)
     }
 
-    private fun lineInfoHushMap(goorback: String): HashMap<String, String>{
-        val changeline: String = goorback.changeLine.toString()
+    private fun setLineInfo(goorback: String): LineInfo{
+        val changeline: Int = goorback.changeLine
         val departpoint: String = goorback.departPoint(R.string.office.strings, R.string.home.strings)
         val arrivalpoint: String = goorback.arrivePoint(R.string.office.strings, R.string.home.strings)
-        val departstation: Array<String> = mainview.getDepartStation(goorback, changeline.toInt())
-        val arrivalstation: Array<String> = mainview.getArriveStation(goorback, changeline.toInt())
-        val linename: Array<String> = mainview.getLineName(goorback, changeline.toInt())
-        val linecolor: Array<String> = mainview.getLineColor(goorback, changeline.toInt())
-        val ridetime: Array<String> = mainview.getRideTime(goorback, changeline.toInt())
-        val transportation: Array<String> = mainview.getTransportation(goorback, changeline.toInt())
-        val transittime: Array<String> = mainview.getTransitTime(goorback, changeline.toInt())
-        return hashMapOf(
-            "changeline" to changeline,
-            "departpoint" to departpoint,
-            "arrivalpoint" to arrivalpoint,
-            "departstation1" to departstation[0],
-            "departstation2" to departstation[1],
-            "departstation3" to departstation[2],
-            "arrivalstation1" to arrivalstation[0],
-            "arrivalstation2" to arrivalstation[1],
-            "arrivalstation3" to arrivalstation[2],
-            "linename1" to linename[0],
-            "linename2" to linename[1],
-            "linename3" to linename[2],
-            "linecolor1" to linecolor[0],
-            "linecolor2" to linecolor[1],
-            "linecolor3" to linecolor[2],
-            "ridetime1" to ridetime[0],
-            "ridetime2" to ridetime[1],
-            "ridetime3" to ridetime[2],
-            "transportatione" to transportation[0],
-            "transportation1" to transportation[1],
-            "transportation2" to transportation[2],
-            "transportation3" to transportation[3],
-            "transittimee" to transittime[0],
-            "transittime1" to transittime[1],
-            "transittime2" to transittime[2],
-            "transittime3" to transittime[3]
+        val departstation: Array<String> = mainview.getDepartStation(goorback, changeline)
+        val arrivalstation: Array<String> = mainview.getArriveStation(goorback, changeline)
+        val linename: Array<String> = mainview.getLineName(goorback, changeline)
+        val linecolor: Array<String> = mainview.getLineColor(goorback, changeline)
+        val ridetime: Array<String> = mainview.getRideTime(goorback, changeline)
+        val transportation: Array<String> = mainview.getTransportation(goorback, changeline)
+        val transittime: Array<String> = mainview.getTransitTime(goorback, changeline)
+        return LineInfo(changeline, departpoint, arrivalpoint,
+            departstation[0], departstation[1], departstation[2],
+            arrivalstation[0], arrivalstation[1], arrivalstation[2],
+            linename[0], linename[1], linename[2],
+            linecolor[0], linecolor[1], linecolor[2],
+            ridetime[0], ridetime[1], ridetime[2],
+            transportation[0], transportation[1], transportation[2], transportation[3],
+            transittime[0], transittime[1], transittime[2], transittime[3]
         )
     }
 
-    private fun timetableHushMap(timetablearray: Array<String>): HashMap<String, String> {
-        return hashMapOf(
-            "hour04" to timetablearray[0],
-            "hour05" to timetablearray[1],
-            "hour06" to timetablearray[2],
-            "hour07" to timetablearray[3],
-            "hour08" to timetablearray[4],
-            "hour09" to timetablearray[5],
-            "hour10" to timetablearray[6],
-            "hour11" to timetablearray[7],
-            "hour12" to timetablearray[8],
-            "hour13" to timetablearray[9],
-            "hour14" to timetablearray[10],
-            "hour15" to timetablearray[11],
-            "hour16" to timetablearray[12],
-            "hour17" to timetablearray[13],
-            "hour18" to timetablearray[14],
-            "hour19" to timetablearray[15],
-            "hour20" to timetablearray[16],
-            "hour21" to timetablearray[17],
-            "hour22" to timetablearray[18],
-            "hour23" to timetablearray[19],
-            "hour24" to timetablearray[20],
-            "hour25" to timetablearray[21]
+    private fun setTimetableHour(goorback: String, linenumber: Int, day: Int): TimetableHour {
+        val timetablearray: Array<String> = timetable.getTimetableStringArray(goorback, linenumber, day)
+        return TimetableHour(timetablearray[0], timetablearray[1], timetablearray[2],
+            timetablearray[3], timetablearray[4], timetablearray[5], timetablearray[6],
+            timetablearray[7], timetablearray[8], timetablearray[9], timetablearray[10],
+            timetablearray[11], timetablearray[12], timetablearray[13], timetablearray[14],
+            timetablearray[15], timetablearray[16], timetablearray[17], timetablearray[18],
+            timetablearray[19], timetablearray[20], timetablearray[21]
         )
     }
+
+    data class LineInfo(
+        val changeline: Int = 0,
+        val departpoint: String = "",
+        val arrivalpoint: String = "",
+        val departstation1: String = "",
+        val departstation2: String = "",
+        val departstation3: String = "",
+        val arrivalstation1: String = "",
+        val arrivalstation2: String = "",
+        val arrivalstation3: String = "",
+        val linename1: String = "",
+        val linename2: String = "",
+        val linename3: String = "",
+        val linecolor1: String = "",
+        val linecolor2: String = "",
+        val linecolor3: String = "",
+        val ridetime1:String = "",
+        val ridetime2:String = "",
+        val ridetime3:String = "",
+        val transportatione: String = "",
+        val transportation1: String = "",
+        val transportation2: String = "",
+        val transportation3: String = "",
+        val transittimee:String = "",
+        val transittime1:String = "",
+        val transittime2:String = "",
+        val transittime3:String = ""
+    )
+
+    data class TimetableHour(
+        val hour04: String = "",
+        val hour05: String = "",
+        val hour06: String = "",
+        val hour07: String = "",
+        val hour08: String = "",
+        val hour09: String = "",
+        val hour10: String = "",
+        val hour11: String = "",
+        val hour12: String = "",
+        val hour13: String = "",
+        val hour14: String = "",
+        val hour15: String = "",
+        val hour16: String = "",
+        val hour17: String = "",
+        val hour18: String = "",
+        val hour19: String = "",
+        val hour20: String = "",
+        val hour21: String = "",
+        val hour22: String = "",
+        val hour23: String = "",
+        val hour24: String = "",
+        val hour25: String = ""
+    )
 }
 

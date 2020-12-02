@@ -49,22 +49,22 @@ fun String.arrivePoint(defaultoffice: String, defaulthome: String): String =
         this.goOrBackString("departurepoint".savedText(defaultoffice), "destination".savedText(defaulthome))
 //乗車駅名を取得:goorback
 fun String.departStation(i: Int, defaultdepsta: String): String =
-        "${this}line${i + 1}departstation".savedText(defaultdepsta)
+        "${this}departstation${i + 1}".savedText(defaultdepsta)
 //降車駅名を取得:goorback
 fun String.arriveStation(i: Int, defaultarrsta: String): String =
-        "${this}line${i + 1}arrivestation".savedText(defaultarrsta)
+        "${this}arrivalstation${i + 1}".savedText(defaultarrsta)
 //路線名を取得:goorback
 fun String.lineName(i: Int, defaultline: String): String =
-        "${this}line${i + 1}nameofline".savedText(defaultline)
+        "${this}linename${i + 1}".savedText(defaultline)
 //路線カラーを取得:goorback
 fun String.lineColor(i: Int, defaultcolor: String): String =
-        "${this}line${i + 1}colorofline".savedText(defaultcolor)
+        "${this}linecolor${i + 1}".savedText(defaultcolor)
 //乗車時間を取得:goorback
 fun String.rideTime(i: Int, defaulttime: String): String =
-        "${this}line${i + 1}ridetime".savedText(defaulttime)
+        "${this}ridetime${i + 1}".savedText(defaulttime)
 //乗車時間を取得(Int型):goorback
 fun String.rideTimeInt(i: Int): Int =
-        "${this}line${i + 1}ridetime".savedInt
+        "${this}ridetime${i + 1}".savedInt
 //乗換手段を取得:goorback
 fun String.transportation(i: Int, defaulttrans: String): String =
         "${this}transportation${i.e}".savedText(defaulttrans)
@@ -113,3 +113,5 @@ val String.variousSettingsTitle: String get() = "${R.string.varioussettings.stri
     "go2" -> R.string.go2route.strings
     else -> R.string.back1route.strings
 }
+
+

@@ -1,13 +1,11 @@
 package com.example.mytimetablemaker
 
-import android.content.Context
-
 //時刻表タイトルを取得
 fun String.timeTableTitle(arrivestation: String) = "($this ${R.string.koron.strings} $arrivestation${R.string.houmen.strings})"
 
 //内部ストレージに保存された各時間の時刻表データをStringとして取得
 fun String.timeTableKey(i: Int, hour: Int, currentday: Int): String =
-        "${this}line${i + 1}h${hour.addZeroTime}${currentday.addWeekend}setting"
+        "${this}timetable${i + 1}hour${hour.addZeroTime}${currentday.weekDayOrEnd}"
 
 //内部ストレージに保存された各時間の時刻表データをStringとして取得
 fun String.timeTableString(i: Int, hour: Int, currentday: Int): String =
@@ -15,21 +13,24 @@ fun String.timeTableString(i: Int, hour: Int, currentday: Int): String =
 
 //内部ストレージに保存された各時間の時刻表データをInt配列として取得
 fun String.timeTableArrayInt(i: Int, hour: Int, currentday: Int): Array<Int> =
-        "${this}line${i + 1}h${hour.addZeroTime}${currentday.addWeekend}setting".savedText("")
+        "${this}timetable${i + 1}hour${hour.addZeroTime}${currentday.weekDayOrEnd}".savedText("")
                 .timeSorting.timeArrayInt(hour)
 
 //
-val Int.addWeekend: String get() = this.dayOrEndString("weekend", "")
+val Int.weekDayOrEnd get() = when(this) { 0, 6 -> "weekend" else -> "weekday" }
+
 //
 fun Int.dayOrEndString(weekendstring: String, weekdaystring: String): String = when (this) {
     0, 6 -> weekendstring
     else -> weekdaystring
 }
+
 //
 fun Int.dayOrEndColor(weekendcolor: Int, weekdaycolor: Int): Int = when (this) {
     0, 6 -> weekendcolor
     else -> weekdaycolor
 }
+
 //
 val Int.otherDay: Int get() = when (this) { in 1..5 -> 0 else -> 1 }
 

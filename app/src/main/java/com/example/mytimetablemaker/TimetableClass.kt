@@ -42,7 +42,7 @@ class Timetable {
         val edittext = EditText(context)
         val title1: String = R.string.inputtime.strings
         val title2: String = R.string.copytime.strings
-        val key = "${goorback}line${linenumber + 1}h${hour.addZeroTime}${currentday.addWeekend}setting"
+        val key = "${goorback}timetable${linenumber + 1}hour${hour.addZeroTime}${currentday.weekDayOrEnd}"
         val hint: String = R.string.inputtimehint.strings
         val currenttext: String = textview.text.toString()
         val arraylist: Array<String> = timetableListArray(hour, currentday)

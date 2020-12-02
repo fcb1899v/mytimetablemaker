@@ -66,7 +66,7 @@ class MainViewDialog {
     //発車駅名を設定するダイアログを表示する関数
     fun setDepartStationDialog(textview: TextView, context: Context, goorback: String, i: Int) {
         val edittext = EditText(context)
-        val key = "${goorback}line${i + 1}departstation"
+        val key = "${goorback}departstation${i + 1}"
         val title = "${R.string.settingstationnametitle.strings}${R.string.departstation.strings}${i + 1}"
         val savedtext: String = goorback.departStation(i, "")
         edittext.setText(savedtext)
@@ -77,7 +77,7 @@ class MainViewDialog {
     //降車駅名を取得するダイアログ
     fun setArriveStationDialog(textview: TextView, context: Context, goorback: String, i: Int) {
         val edittext = EditText(context)
-        val key = "${goorback}line${i + 1}arrivestation"
+        val key = "${goorback}arrivalstation${i + 1}"
         val title = "${R.string.settingstationnametitle.strings}${R.string.arrivestation.strings}${i + 1}"
         val savedtext: String = goorback.arriveStation(i, "")
         edittext.setText(savedtext)
@@ -99,8 +99,8 @@ class MainViewDialog {
     //路線名を設定するDialogを表示する関数（Neutralボタンで路線カラー設定用Dialogを表示）
     fun setLineNameDialog(textview: TextView, view: View, context: Context, goorback: String, i: Int) {
         val edittext = EditText(context)
-        val key1 = "${goorback}line${i + 1}nameofline"
-        val key2 = "${goorback}line${i + 1}colorofline"
+        val key1 = "${goorback}linename${i + 1}"
+        val key2 = "${goorback}linecolor${i + 1}"
         val title1 = "${R.string.settinglinenametitle.strings}${R.string.line.strings}${i + 1}"
         val title2: String = R.string.settinglinecolortitle.strings
         val linecolorlist: Array<String> = R.array.linecolorlist.arrayStrings
@@ -122,7 +122,7 @@ class MainViewDialog {
 
     //乗車時間を設定するDialogを表示する関数
     fun setRideTimeDialog(context: Context, goorback: String, i: Int, intent: Intent) {
-        val key = "${goorback}line${i + 1}ridetime"
+        val key = "${goorback}ridetime${i + 1}"
         val title = "${R.string.settingridetimetitle.strings}${goorback.lineName(i, "${R.string.line.strings}${i + 1}")}"
         val hint: String = R.string.minite2hint.strings
         val neutraltitle: String = R.string.timetablesetting.strings

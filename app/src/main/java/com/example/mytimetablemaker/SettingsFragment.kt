@@ -107,7 +107,7 @@ class SettingsFragment : Fragment() {
 
         //サーバー保存
         binding.getserverdatabutton.setOnClickListener {
-            //firebasefirestore.getLineInfoFirestore()
+            firebasefirestore.getFirestore()
         }
 
 
