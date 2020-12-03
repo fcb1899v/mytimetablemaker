@@ -222,7 +222,7 @@
     <string name="picturebutton">Select your timetable picture</string>
     <string name="timetablehint">Enter 0～59 [min] separated by a space</string>
 
-    //
+    //Firebase
     <string name="account">Account</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_out">Sign Out</string>
@@ -253,4 +253,9 @@
     <string name="get_data_from_server">Get data from server</string>
     <string name="successed_to_get_data">Successed to get data</string>
     <string name="failed_to_get_data">Failed to get data</string>
+    <string name="overwirrten_byserverdata">Will be overwritten by the data on server</string>
+    <string name="overwirrten_serverdata">Your data on server will be overwritten</string>
+    <string name="signout_your_account_q">Sign out your account?</string>
+    <string name="delete_your_account_q">Delete your account?</string>
+
 </resources>

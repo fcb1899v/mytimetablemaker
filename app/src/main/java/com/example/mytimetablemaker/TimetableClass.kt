@@ -104,8 +104,7 @@ class Timetable {
                     textviewarray[hour - 4]!!.text = copykey.savedText("")
                 }
             }
-            setPositiveButton(R.string.no) { _, _ ->
-            }
+            setPositiveButton(R.string.no, null)
             show()
         }
     }

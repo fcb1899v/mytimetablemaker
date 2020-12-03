@@ -240,6 +240,7 @@
     <string name="failed_to_sent_reset_mail">再設定メールを送信できませんでした</string>
     <string name="sent_authmail">認証メールを送信しました</string>
     <string name="failed_to_sent_authmail">認証メールを送信できませんでした</string>
+    <string name="auth_mail_check">認証メールを確認してください</string>
     <string name="created_your_account">アカウントを登録しました</string>
     <string name="failed_to_creat_account">アカウント登録に失敗しました</string>
     <string name="delete_your_account">アカウントを削除しました</string>
@@ -248,14 +249,15 @@
     <string name="hint_password">パスワードを入力します</string>
     <string name="auth_successed">ログインしました</string>
     <string name="auth_failed">ログインに失敗しました</string>
-    <string name="auth_mail_check">認証メールを確認してください</string>
     <string name="save_data_to_server">サーバーにデータ保存</string>
     <string name="successed_to_save_data">データ保存に成功しました</string>
     <string name="failed_to_save_data">データ保存に失敗しました</string>
+    <string name="overwirrten_serverdata">サーバーデータが上書きされます。\nよろしいですか？</string>
     <string name="get_data_from_server">サーバーからデータ取得</string>
     <string name="successed_to_get_data">データ取得に成功しました</string>
     <string name="failed_to_get_data">データ取得に失敗しました</string>
-
-
+    <string name="overwirrten_byserverdata">サーバーデータを取得します。\nよろしいですか？</string>
+    <string name="signout_your_account_q">ログアウトしますか?</string>
+    <string name="delete_your_account_q">アカウントを削除してもよいですか?</string>
 
 </resources>

@@ -13,7 +13,9 @@ class EmailAuthActivity : AppCompatActivity() {
 
     //クラスの定義
     private var auth: FirebaseAuth = Firebase.auth
+    private var userid = auth.currentUser?.email.toString()
     private var emailauth = EmailAuth(auth)
+    private var firebasefirestore = FirebaseFirestore()
     private val admobclass = AdMobClass()
 
     //ViewBinding
@@ -25,7 +27,7 @@ class EmailAuthActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //一度サインインしたらログイン画面をスキップ
-        if (auth.currentUser?.email.toString() != "null") {
+        if (userid != "null") {
             startActivity(emailauth.intentSignInChangeActivity())
         }
 
@@ -51,8 +53,6 @@ class EmailAuthActivity : AppCompatActivity() {
 
         //AdMob
         admobclass.setAdMob(binding.topadview, this)
-
-
     }
 
     // サインイン処理
@@ -61,6 +61,7 @@ class EmailAuthActivity : AppCompatActivity() {
             auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task: Task<AuthResult> ->
                 emailauth.signInMessage(task, email, password)
                 if (task.isSuccessful && auth.currentUser!!.isEmailVerified) {
+                    firebasefirestore.getFirestore()
                     startActivity(emailauth.intentSignInChangeActivity())
                 }
             }

@@ -19,6 +19,11 @@ val Int.strings: String get() = context.getString(this)
 val Int.arrayStrings: Array<String> get() = context.resources.getStringArray(this)
 //
 val Int.setColor: Int get() = parseColor(this.strings)
+//
+val String?.stringIfNullOrNot: String get() = when(this) { null -> "" else -> this }
+//
+val Boolean?.booleanIfNullOrNot: Boolean get() = when(this) { null -> false else -> this }
+
 
 //SharedPreferenceに保存された値を取得:key
 fun String.savedText(defaulttext: String): String = when (val edittext: String? =

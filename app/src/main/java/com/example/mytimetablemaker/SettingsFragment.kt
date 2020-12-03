@@ -87,29 +87,36 @@ class SettingsFragment : Fragment() {
             }
         }
 
+        //サーバーにデータ保存
+        binding.saveserverbutton.setOnClickListener {
+            firebasefirestore.saveAlertFirestore(requireContext())
+        }
+
+        //サーバーからデータ取得
+        binding.getserverdatabutton.setOnClickListener {
+            firebasefirestore.getAlertFirestore(requireContext())
+        }
+
         //サインアウト
-        binding.signoutbutton.setOnClickListener { startActivity(emailauth.intentSignOut()) }
+        binding.signoutbutton.setOnClickListener {
+            startActivity(emailauth.intentSignOut())
+        }
 
         //アカウントの削除
-        binding.deleteaccountbutton.setOnClickListener { startActivity(emailauth.intentDeleteAccount()) }
+        binding.deleteaccountbutton.setOnClickListener {
+            if (emailauth.intentDeleteAccount(requireContext()) != null ) {
+                startActivity(emailauth.intentDeleteAccount(requireContext()))
+            }
+        }
 
         //利用規約・プライバシーポリシー
-        binding.privacypolicy.setOnClickListener { startActivity(emailauth.intentPrivacyPolicy()) }
+        binding.privacypolicy.setOnClickListener {
+            startActivity(emailauth.intentPrivacyPolicy())
+        }
 
         //バージョンの表示
         binding.versionnumber.text = BuildConfig.VERSION_NAME
         //private val versionCodes: Int = BuildConfig.VERSION_CODE
-
-        //サーバー保存
-        binding.saveserverbutton.setOnClickListener {
-            firebasefirestore.saveFirestore()
-        }
-
-        //サーバー保存
-        binding.getserverdatabutton.setOnClickListener {
-            firebasefirestore.getFirestore()
-        }
-
 
         return binding.root
     }

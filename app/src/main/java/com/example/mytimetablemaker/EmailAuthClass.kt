@@ -15,6 +15,8 @@ import com.google.firebase.auth.FirebaseAuth
 
 class EmailAuth(private val auth: FirebaseAuth) {
 
+    private val firebasefirestore = FirebaseFirestore()
+
     // ユーザー登録処理
     fun createAccount(email: String, password: String) {
         if (email.isNotEmpty() && password.isNotEmpty()) {
@@ -53,14 +55,25 @@ class EmailAuth(private val auth: FirebaseAuth) {
     fun intentSignOut(): Intent {
         auth.signOut()
         Toast.makeText(context, R.string.signed_out.strings, Toast.LENGTH_SHORT).show()
+        firebasefirestore.resetPreferenceData()
         return Intent(context, EmailAuthActivity::class.java)
             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
     }
 
     //アカウント削除
-    fun intentDeleteAccount(): Intent {
-        auth.currentUser?.delete()?.addOnCompleteListener { }
-        return intentSignOut()
+    fun intentDeleteAccount(context: Context): Intent? {
+        var intent: Intent? = null
+        AlertDialog.Builder(context).apply {
+            setTitle(R.string.delete_your_account_q.strings)
+            setNegativeButton(R.string.yes) { _, _ ->
+                auth.currentUser?.delete()?.addOnCompleteListener {
+                    intent = intentSignOut()
+                }
+            }
+            setPositiveButton(R.string.no, null)
+            show()
+        }
+        return intent
     }
 
     //サインイン後の画面遷移
