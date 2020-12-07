@@ -6,6 +6,7 @@ import androidx.preference.PreferenceManager
 import com.example.mytimetablemaker.Application.Companion.context
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentSnapshot
+import java.lang.Boolean.parseBoolean
 
 //Resourcesファイルをどこでも参照できるようにするクラス
 class Application: android.app.Application() {
@@ -29,7 +30,7 @@ val Boolean?.booleanIfNullOrNot: Boolean get() = when(this) { null -> false else
 //
 fun Task<DocumentSnapshot>.taskResult(key: String, defaultvalue: String) = this.result?.get(key).toString().stringIfNullOrNot(defaultvalue)
 //
-fun Task<DocumentSnapshot>.taskResultBoolean(key: String) = this.result?.get(key).toString().toBoolean().booleanIfNullOrNot
+fun Task<DocumentSnapshot>.taskResultBoolean(key: String) = parseBoolean(this.result?.get(key).toString()).booleanIfNullOrNot
 
 //SharedPreferenceに保存された値を取得:key
 fun String.savedText(defaulttext: String): String = when (val edittext: String? =
