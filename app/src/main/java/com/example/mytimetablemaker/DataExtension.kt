@@ -4,6 +4,8 @@ import android.content.Context
 import android.graphics.Color.parseColor
 import androidx.preference.PreferenceManager
 import com.example.mytimetablemaker.Application.Companion.context
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.DocumentSnapshot
 
 //Resourcesファイルをどこでも参照できるようにするクラス
 class Application: android.app.Application() {
@@ -13,6 +15,7 @@ class Application: android.app.Application() {
         context = this
     }
 }
+
 //
 val Int.strings: String get() = context.getString(this)
 //
@@ -20,10 +23,13 @@ val Int.arrayStrings: Array<String> get() = context.resources.getStringArray(thi
 //
 val Int.setColor: Int get() = parseColor(this.strings)
 //
-val String?.stringIfNullOrNot: String get() = when(this) { null -> "" else -> this }
+fun String?.stringIfNullOrNot(defaultvalue: String): String = when(this) { null -> defaultvalue else -> this }
 //
 val Boolean?.booleanIfNullOrNot: Boolean get() = when(this) { null -> false else -> this }
-
+//
+fun Task<DocumentSnapshot>.taskResult(key: String, defaultvalue: String) = this.result?.get(key).toString().stringIfNullOrNot(defaultvalue)
+//
+fun Task<DocumentSnapshot>.taskResultBoolean(key: String) = this.result?.get(key).toString().toBoolean().booleanIfNullOrNot
 
 //SharedPreferenceに保存された値を取得:key
 fun String.savedText(defaulttext: String): String = when (val edittext: String? =
@@ -81,10 +87,21 @@ fun String.transitTimeInt(i: Int): Int =
         "${this}transittime${i.e}".savedInt
 
 //:goorback
-fun String.goOrBackString(backstring: String, gostring: String) = when (this) {
+fun String.goOrBackString(backstring: String, gostring: String): String = when (this) {
     "back1", "back2" -> backstring
     else -> gostring
 }
+//
+val String.departPointKey: String get() = this.goOrBackString("destination", "departurepoint")
+//
+val String.arrivalPointKey: String get() = this.goOrBackString("departurepoint", "destination")
+//
+val String.departPointDefault: String get() = this.goOrBackString(R.string.office.strings, R.string.home.strings)
+//
+val String.arrivalPointDefault: String get() = this.goOrBackString(R.string.home.strings, R.string.office.strings)
+
+
+
 //:goorback
 val String.otherGoOrBack: String get() = when (this) {
     "go1" -> "go2"

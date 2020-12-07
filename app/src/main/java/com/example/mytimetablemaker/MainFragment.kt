@@ -13,8 +13,7 @@ class MainFragment {
     private val mainview = MainView()
     private val mainviewdialog = MainViewDialog()
 
-    fun mainFun(
-        context: Context, currentday: Int, currenttime: Int, goorback: String,
+    fun mainFun(context: Context, currentday: Int, currenttime: Int, goorback: String,
         departurepointview: TextView, departstationview: Array<TextView>, arrivestationview: Array<TextView>,
         arrivalpointview: TextView, linenameview: Array<TextView>, linelineview: Array<View>,
         transportview: Array<TextView>, transitlineview: Array<View>, layoutview: Array<LinearLayout>,

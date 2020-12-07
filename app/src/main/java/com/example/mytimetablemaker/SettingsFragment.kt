@@ -44,8 +44,8 @@ class SettingsFragment : Fragment() {
             binding.back2settingbutton, binding.go2settingbutton)
 
         //スイッチの状態を表示
-        binding.back2switch.isChecked = MainView().getRoot2Boolean("back2switch", false)
-        binding.go2switch.isChecked = MainView().getRoot2Boolean("go2switch", false)
+        binding.back2switch.isChecked = MainView().getRoot2Switch("back2")
+        binding.go2switch.isChecked = MainView().getRoot2Switch("go2")
 
         //スイッチの状態に応じて表示を変更
         binding.back2changelinelayout.isVisible = binding.back2switch.isChecked

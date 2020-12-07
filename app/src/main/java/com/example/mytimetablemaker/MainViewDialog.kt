@@ -55,7 +55,7 @@ class MainViewDialog {
     //出発地名を設定するダイアログを表示する関数
     fun setDeparturePointDialog(textview: TextView, context: Context, goorback: String) {
         val edittext = EditText(context)
-        val key: String = goorback.goOrBackString("destination", "departurepoint")
+        val key: String = goorback.departPointKey
         val title: String = R.string.settingdepartplacetitle.strings
         val savedtext: String = goorback.departPoint("", "")
         edittext.setText(savedtext)
@@ -88,7 +88,7 @@ class MainViewDialog {
     //目的地名を取得するダイアログ
     fun setArrivalPointDialog(textview: TextView, context: Context, goorback: String) {
         val edittext = EditText(context)
-        val key: String = goorback.goOrBackString("departurepoint", "destination")
+        val key: String = goorback.arrivalPointKey
         val title: String = R.string.settingdestinationtitle.strings
         val savedtext: String = goorback.arrivePoint("", "")
         edittext.setText(savedtext)

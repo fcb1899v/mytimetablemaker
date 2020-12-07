@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 class EmailAuth(private val auth: FirebaseAuth) {
 
+    private val setting = Setting()
     private val firebasefirestore = FirebaseFirestore()
 
     // ユーザー登録処理
@@ -22,7 +23,10 @@ class EmailAuth(private val auth: FirebaseAuth) {
         if (email.isNotEmpty() && password.isNotEmpty()) {
             auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task: Task<AuthResult> ->
                 createAccountMessage(task, email, password)
-                if (task.isSuccessful) { sendEmailVerrification() }
+                if (task.isSuccessful) {
+                    setting.prefSaveBoolean(context, "savepref", false)
+                    sendEmailVerrification()
+                }
             }
         }
     }
@@ -54,8 +58,8 @@ class EmailAuth(private val auth: FirebaseAuth) {
     //サインアウト
     fun intentSignOut(): Intent {
         auth.signOut()
-        Toast.makeText(context, R.string.signed_out.strings, Toast.LENGTH_SHORT).show()
         firebasefirestore.resetPreferenceData()
+        Toast.makeText(context, R.string.signed_out.strings, Toast.LENGTH_SHORT).show()
         return Intent(context, EmailAuthActivity::class.java)
             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
     }

@@ -6,6 +6,7 @@ import android.widget.Toast
 import com.example.mytimetablemaker.Application.Companion.context
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.WriteBatch
@@ -16,9 +17,11 @@ class FirebaseFirestore {
     private val mainview = MainView()
     private val timetable = Timetable()
     private val setting = Setting()
+    private val maxchangeline = 2
 
     private val goorbackarray: Array<String> = arrayOf("back1", "go1", "back2", "go2")
 
+    //サーバーからデータ取得するダイアログの表示
     fun getAlertFirestore(context: Context) {
         AlertDialog.Builder(context).apply {
             setTitle(R.string.overwirrten_byserverdata.strings)
@@ -28,16 +31,8 @@ class FirebaseFirestore {
         }
     }
 
-    fun saveAlertFirestore(context: Context) {
-        AlertDialog.Builder(context).apply {
-            setTitle(R.string.overwirrten_serverdata.strings)
-            setNegativeButton(R.string.yes) { _, _ -> saveFirestore() }
-            setPositiveButton(R.string.no, null)
-            show()
-        }
-    }
-
-    fun getFirestore() {
+    //サーバーからデータ取得
+    private fun getFirestore() {
         (0..3).forEach { i: Int ->
             (0..2).forEach { linenumber: Int ->
                 (0..1).forEach { day: Int ->
@@ -50,8 +45,62 @@ class FirebaseFirestore {
         }
     }
 
+    //サーバーから路線データを取得
+    private fun getLineInfoFirestore(goorback: String) {
+        val userid: String = Firebase.auth.currentUser!!.uid
+        val userdb: DocumentReference =  FirebaseFirestore.getInstance().collection("users").document(userid)
+        val ref: DocumentReference = userdb.collection("goorback").document(goorback)
+        ref.get().addOnCompleteListener { task: Task<DocumentSnapshot> ->
+                if (task.isSuccessful) {
+                    saveLineInfoToPref(goorback, task)
+                    Toast.makeText(context, R.string.successed_to_get_data, Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, R.string.failed_to_get_data, Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
+    //サーバーから時刻表データを取得
+    private fun getTimetableFireStore(goorback: String, linenumber: Int, day: Int, hour: Int) {
+        val userid: String = Firebase.auth.currentUser!!.uid
+        val userdb: DocumentReference =  FirebaseFirestore.getInstance().collection("users").document(userid)
+        val ref: DocumentReference = userdb.collection("goorback").document(goorback)
+        ref.collection("timetable").document("timetable${linenumber + 1}${day.weekDayOrEnd}").get()
+            .addOnCompleteListener { task: Task<DocumentSnapshot> ->
+                if (task.isSuccessful) {
+                    val key  ="${goorback}timetable${linenumber + 1}hour${hour.addZeroTime}${day.weekDayOrEnd}"
+                    setting.prefSaveText(context, key, task.taskResult("hour${hour.addZeroTime}", ""))
+                }
+            }
+    }
+
+    //サインイン時のサーバーデータの取得
+    fun getFirestoreAtSignIn() {
+        val userid: String = Firebase.auth.currentUser!!.uid
+        val userdb: DocumentReference =  FirebaseFirestore.getInstance().collection("users").document(userid)
+        val ref: DocumentReference = userdb.collection("goorback").document("back1")
+        ref.get().addOnCompleteListener { task: Task<DocumentSnapshot> ->
+               if (task.result?.get("changeline") != null) {
+                   getFirestore()
+               } else {
+                   saveFirestore()
+               }
+           }
+    }
+
+    //サーバーにデータ保存するダイアログを表示
+    fun saveAlertFirestore(context: Context) {
+        AlertDialog.Builder(context).apply {
+            setTitle(R.string.overwirrten_serverdata.strings)
+            setNegativeButton(R.string.yes) { _, _ -> saveFirestore() }
+            setPositiveButton(R.string.no, null)
+            show()
+        }
+    }
+
+    //サーバーにデータ保存
     private fun saveFirestore() {
-        val batch = FirebaseFirestore.getInstance().batch()
+        val batch: WriteBatch = FirebaseFirestore.getInstance().batch()
         (0..3).forEach { i: Int ->
             (0..2).forEach { linenumber: Int ->
                 (0..1).forEach { day: Int ->
@@ -65,79 +114,57 @@ class FirebaseFirestore {
             .addOnFailureListener { Toast.makeText(context, R.string.failed_to_save_data, Toast.LENGTH_SHORT).show() }
     }
 
-    private fun getLineInfoFirestore(goorback: String) {
-        val userid: String = Firebase.auth.currentUser!!.uid
-        val userdb =  FirebaseFirestore.getInstance().collection("users").document(userid)
-        val ref = userdb.collection("goorback").document(goorback)
-        ref.get().addOnCompleteListener { task: Task<DocumentSnapshot> ->
-                if (task.isSuccessful) {
-                    saveLineInfoToPref(goorback, task)
-                    Toast.makeText(context, R.string.successed_to_get_data, Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(context, R.string.failed_to_get_data, Toast.LENGTH_SHORT).show()
-                }
-            }
-    }
-
-    private fun getTimetableFireStore(goorback: String, linenumber: Int, day: Int, hour: Int) {
-        val userid: String = Firebase.auth.currentUser!!.uid
-        val userdb =  FirebaseFirestore.getInstance().collection("users").document(userid)
-        val ref = userdb.collection("goorback").document(goorback)
-        ref.collection("timetable").document("timetable${linenumber + 1}${day.weekDayOrEnd}").get()
-            .addOnCompleteListener { task: Task<DocumentSnapshot> ->
-                if (task.isSuccessful) {
-                    val key  ="${goorback}timetable${linenumber + 1}hour${hour.addZeroTime}${day.weekDayOrEnd}"
-                    setting.prefSaveText(context, key, task.result?.get("hour${hour.addZeroTime}").toString().stringIfNullOrNot)
-                }
-            }
-    }
-
-    private fun saveLineInfoToPref(goorback: String, task: Task<DocumentSnapshot>) {
-        setting.prefSaveBoolean(context, "${goorback}switch", task.result?.get("switch").toString().toBoolean().booleanIfNullOrNot)
-        setting.prefSaveText(context, "${goorback}changeline", task.result?.get("changeline").toString().stringIfNullOrNot)
-        setting.prefSaveText(context, goorback.goOrBackString("destination", "departurepoint"), task.result?.get("departpoint").toString().stringIfNullOrNot)
-        setting.prefSaveText(context, goorback.goOrBackString("departurepoint", "destination"), task.result?.get("arrivalpoint").toString().stringIfNullOrNot)
-        (1..3).forEach { i: Int ->
-            setting.prefSaveText(context, "${goorback}departstation${i}", task.result?.get("departstation${i}").toString().stringIfNullOrNot)
-            setting.prefSaveText(context, "${goorback}arrivalstation${i}", task.result?.get("arrivalstation${i}").toString().stringIfNullOrNot)
-            setting.prefSaveText(context, "${goorback}linename${i}", task.result?.get("linename${i}").toString().stringIfNullOrNot)
-            setting.prefSaveText(context, "${goorback}linecolor${i}", task.result?.get("linecolor${i}").toString().stringIfNullOrNot)
-            setting.prefSaveText(context, "${goorback}ridetime${i}", task.result?.get("ridetime${i}").toString().stringIfNullOrNot)
-            setting.prefSaveText(context, "${goorback}transportation${i}", task.result?.get("transportation${i}").toString().stringIfNullOrNot)
-            setting.prefSaveText(context, "${goorback}transittime${i}", task.result?.get("transittime${i}").toString().stringIfNullOrNot)
-        }
-        setting.prefSaveText(context, "${goorback}transportatione", task.result?.get("transportatione").toString().stringIfNullOrNot)
-        setting.prefSaveText(context, "${goorback}transittimee", task.result?.get("transittimee").toString().stringIfNullOrNot)
-    }
-
+    //サーバーに路線データを保存
     private fun saveLineInfoFirestore(goorback: String, batch: WriteBatch){
         val userid: String = Firebase.auth.currentUser!!.uid
-        val userdb =  FirebaseFirestore.getInstance().collection("users").document(userid)
-        val ref = userdb.collection("goorback").document(goorback)
+        val userdb: DocumentReference =  FirebaseFirestore.getInstance().collection("users").document(userid)
+        val ref: DocumentReference = userdb.collection("goorback").document(goorback)
         batch.set(ref, setLineInfo(goorback))
     }
 
+    //サーバーに時刻表データを保存
     private fun saveTimetableFirestore(goorback: String, linenumber: Int, day: Int, batch: WriteBatch){
         val userid: String = Firebase.auth.currentUser!!.uid
-        val userdb =  FirebaseFirestore.getInstance().collection("users").document(userid)
-        val ref = userdb.collection("goorback").document(goorback)
+        val userdb: DocumentReference =  FirebaseFirestore.getInstance().collection("users").document(userid)
+        val ref: DocumentReference = userdb.collection("goorback").document(goorback)
         val timetablehour: TimetableHour = setTimetableHour(goorback, linenumber, day)
-        val timetableref = ref.collection("timetable").document("timetable${linenumber + 1}${day.weekDayOrEnd}")
+        val timetableref: DocumentReference = ref.collection("timetable")
+            .document("timetable${linenumber + 1}${day.weekDayOrEnd}")
         batch.set(timetableref, timetablehour)
     }
 
+    //
+    private fun saveLineInfoToPref(goorback: String, task: Task<DocumentSnapshot>) {
+        setting.prefSaveBoolean(context, "${goorback}switch", task.taskResultBoolean("switch"))
+        setting.prefSaveText(context, "${goorback}changeline", task.taskResult("changeline", "0"))
+        setting.prefSaveText(context, goorback.departPointKey, task.taskResult("departpoint", goorback.departPointDefault))
+        setting.prefSaveText(context, goorback.arrivalPointKey, task.taskResult("arrivalpoint", goorback.arrivalPointDefault))
+        (1..3).forEach { i: Int ->
+            setting.prefSaveText(context, "${goorback}departstation${i}", task.taskResult("departstation${i}", "${R.string.depsta.strings}${i}"))
+            setting.prefSaveText(context, "${goorback}arrivalstation${i}", task.taskResult("arrivalstation${i}", "${R.string.arrsta.strings}${i}"))
+            setting.prefSaveText(context, "${goorback}linename${i}", task.taskResult("linename${i}", "${R.string.line.strings}${i}"))
+            setting.prefSaveText(context, "${goorback}linecolor${i}", task.taskResult("linecolor${i}", R.string.coloraccent.strings))
+            setting.prefSaveText(context, "${goorback}ridetime${i}", task.taskResult("ridetime${i}", ""))
+            setting.prefSaveText(context, "${goorback}transportation${i}", task.taskResult("transportation${i}", R.string.walking.strings))
+            setting.prefSaveText(context, "${goorback}transittime${i}", task.taskResult("transittime${i}", "0"))
+        }
+        setting.prefSaveText(context, "${goorback}transportatione", task.taskResult("transportatione", R.string.walking.strings))
+        setting.prefSaveText(context, "${goorback}transittimee", task.taskResult("transittimee", "0"))
+    }
+
+    //
     private fun setLineInfo(goorback: String): LineInfo{
-        val switch: Boolean = mainview.getRoot2Boolean("${goorback}switch", false)
-        val changeline: Int = goorback.changeLine
+        val switch: Boolean = mainview.getRoot2Switch(goorback)
+        val changeline: String = goorback.changeLine.toString()
         val departpoint: String = goorback.departPoint(R.string.office.strings, R.string.home.strings)
         val arrivalpoint: String = goorback.arrivePoint(R.string.office.strings, R.string.home.strings)
-        val departstation: Array<String> = mainview.getDepartStation(goorback, changeline)
-        val arrivalstation: Array<String> = mainview.getArriveStation(goorback, changeline)
-        val linename: Array<String> = mainview.getLineName(goorback, changeline)
-        val linecolor: Array<String> = mainview.getLineColor(goorback, changeline)
-        val ridetime: Array<String> = mainview.getRideTime(goorback, changeline)
-        val transportation: Array<String> = mainview.getTransportation(goorback, changeline)
-        val transittime: Array<String> = mainview.getTransitTime(goorback, changeline)
+        val departstation: Array<String> = mainview.getDepartStation(goorback, maxchangeline)
+        val arrivalstation: Array<String> = mainview.getArriveStation(goorback, maxchangeline)
+        val linename: Array<String> = mainview.getLineName(goorback, maxchangeline)
+        val linecolor: Array<String> = mainview.getLineColor(goorback, maxchangeline)
+        val ridetime: Array<String> = mainview.getRideTime(goorback, maxchangeline)
+        val transportation: Array<String> = mainview.getTransportation(goorback, maxchangeline)
+        val transittime: Array<String> = mainview.getTransitTime(goorback, maxchangeline)
         return LineInfo(switch, changeline, departpoint, arrivalpoint,
             departstation[0], departstation[1], departstation[2],
             arrivalstation[0], arrivalstation[1], arrivalstation[2],
@@ -149,6 +176,7 @@ class FirebaseFirestore {
         )
     }
 
+    //
     private fun setTimetableHour(goorback: String, linenumber: Int, day: Int): TimetableHour {
         val timetablearray: Array<String> = timetable.getTimetableStringArray(goorback, linenumber, day)
         return TimetableHour(timetablearray[0], timetablearray[1], timetablearray[2],
@@ -160,23 +188,24 @@ class FirebaseFirestore {
         )
     }
 
+    //
     fun resetPreferenceData() {
         (0..3).forEach { i: Int ->
             when(i) { 2, 3 -> setting.prefSaveBoolean(context, "${goorbackarray[i]}switch", false)}
-            setting.prefSaveText(context, "${goorbackarray[i]}changeline", "")
-            setting.prefSaveText(context, goorbackarray[i].goOrBackString("destination", "departurepoint"), "")
-            setting.prefSaveText(context, goorbackarray[i].goOrBackString("departurepoint", "destination"), "")
+            setting.prefSaveText(context, "${goorbackarray[i]}changeline", "0")
+            setting.prefSaveText(context, goorbackarray[i].departPointKey, goorbackarray[i].departPointDefault)
+            setting.prefSaveText(context, goorbackarray[i].arrivalPointKey, goorbackarray[i].arrivalPointDefault)
             (1..3).forEach { j: Int ->
-                setting.prefSaveText(context, "${goorbackarray[i]}departstation${j}", "")
-                setting.prefSaveText(context, "${goorbackarray[i]}arrivalstation${j}", "")
-                setting.prefSaveText(context, "${goorbackarray[i]}linename${j}", "")
-                setting.prefSaveText(context, "${goorbackarray[i]}linecolor${j}", "")
-                setting.prefSaveText(context, "${goorbackarray[i]}ridetime${j}", "")
-                setting.prefSaveText(context, "${goorbackarray[i]}transportation${j}", "")
-                setting.prefSaveText(context, "${goorbackarray[i]}transittime${j}", "")
+                setting.prefSaveText(context, "${goorbackarray[i]}departstation${j}", "${R.string.depsta.strings}${j}")
+                setting.prefSaveText(context, "${goorbackarray[i]}arrivalstation${j}", "${R.string.arrsta.strings}${j}")
+                setting.prefSaveText(context, "${goorbackarray[i]}linename${j}", "${R.string.line.strings}${j}")
+                setting.prefSaveText(context, "${goorbackarray[i]}linecolor${j}", R.string.coloraccent.strings)
+                setting.prefSaveText(context, "${goorbackarray[i]}ridetime${j}", "0")
+                setting.prefSaveText(context, "${goorbackarray[i]}transportation${j}", R.string.walking.strings)
+                setting.prefSaveText(context, "${goorbackarray[i]}transittime${j}", "0")
             }
-            setting.prefSaveText(context, "${goorbackarray[i]}transportatione", "")
-            setting.prefSaveText(context, "${goorbackarray[i]}transittimee", "")
+            setting.prefSaveText(context, "${goorbackarray[i]}transportatione", R.string.walking.strings)
+            setting.prefSaveText(context, "${goorbackarray[i]}transittimee", "0")
             (0..2).forEach { linenumber: Int ->
                 (0..1).forEach { day: Int ->
                     (4..25).forEach { hour: Int ->
@@ -187,9 +216,10 @@ class FirebaseFirestore {
         }
     }
 
+    //
     data class LineInfo(
         val switch: Boolean = false,
-        val changeline: Int = 0,
+        val changeline: String = "",
         val departpoint: String = "",
         val arrivalpoint: String = "",
         val departstation1: String = "",
@@ -217,6 +247,7 @@ class FirebaseFirestore {
         val transittime3:String = ""
     )
 
+    //
     data class TimetableHour(
         val hour04: String = "",
         val hour05: String = "",

@@ -46,7 +46,9 @@ class MainView {
     //}
 
     //設定画面のルート2を表示するSwitchPreferenceの状態に応じたBooleanを読み出す関数
-    fun getRoot2Boolean(key: String, defaultflag: Boolean): Boolean {
+    fun getRoot2Switch(goorback: String): Boolean {
+        val key = "${goorback}switch"
+        val defaultflag = false
         return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, defaultflag)
     }
 

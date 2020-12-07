@@ -116,7 +116,7 @@ class MainActivity: AppCompatActivity() {
                     .commitAllowingStateLoss()
             }
 
-            val back2display: Boolean = mainview.getRoot2Boolean(goorback2 + "switch",false)
+            val back2display: Boolean = mainview.getRoot2Switch(goorback2)
             binding.goorback2fragment.visibility = if (back2display) { VISIBLE } else { GONE }
             binding.centerLine.visibility = if (back2display) { VISIBLE } else { GONE }
 
