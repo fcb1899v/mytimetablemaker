@@ -95,12 +95,8 @@ class EmailAuth(private val auth: FirebaseAuth) {
 
     //パスワードリセット
     fun sendPasswordResetMailDialog(context: Context) {
-        val edittext: EditText = EditText(context).apply {
-            setHint(R.string.hint_email)
-            gravity = Gravity.CENTER
-            setTextColor(Color.BLACK)
-            textSize = 20F
-        }
+        val edittext = EditText(context)
+        setting.setEditEmail(edittext)
         AlertDialog.Builder(context).apply {
             setTitle(R.string.reset_password.strings)
             setView(edittext)

@@ -14,7 +14,6 @@ class EmailAuthActivity : AppCompatActivity() {
     //クラスの定義
     private var auth: FirebaseAuth = Firebase.auth
     private var useremail: String = auth.currentUser?.email.toString()
-    private var userid: String = auth.currentUser?.uid.toString()
     private var emailauth = EmailAuth(auth)
     private var firebasefirestore = FirebaseFirestore()
     private val admobclass = AdMobClass()

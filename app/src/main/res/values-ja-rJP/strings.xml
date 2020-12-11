@@ -252,6 +252,8 @@
     <string name="save_data_to_server">サーバーにデータ保存</string>
     <string name="successed_to_save_data">データ保存に成功しました</string>
     <string name="failed_to_save_data">データ保存に失敗しました</string>
+    <string name="successed_to_delete_data">データ削除に成功しました</string>
+    <string name="failed_to_delete_data">データ削除に失敗しました</string>
     <string name="overwirrten_serverdata">サーバーデータが上書きされます。\nよろしいですか？</string>
     <string name="get_data_from_server">サーバーからデータ取得</string>
     <string name="successed_to_get_data">データ取得に成功しました</string>

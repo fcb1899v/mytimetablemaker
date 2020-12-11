@@ -12,7 +12,6 @@ import com.example.mytimetablemaker.databinding.FragmentSettingsBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-
 @Suppress("UNREACHABLE_CODE")
 class SettingsFragment : Fragment() {
 

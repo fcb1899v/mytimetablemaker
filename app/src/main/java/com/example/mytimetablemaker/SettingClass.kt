@@ -51,6 +51,15 @@ class Setting {
         }
     }
 
+    fun setEditEmail(edittext: EditText) {
+        edittext.apply {
+            setHint(R.string.hint_email)
+            gravity = Gravity.CENTER
+            setTextColor(Color.BLACK)
+            textSize = 20F
+        }
+    }
+
     //乗換回数の設定用Dialogを表示する関数
     fun setChangeLineDialog(textview: TextView, context: Context, goorback: String) {
         val title: String = R.string.settingchangelinetitle.strings

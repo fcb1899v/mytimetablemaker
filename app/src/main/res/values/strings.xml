@@ -250,6 +250,8 @@
     <string name="save_data_to_server">Save data to server</string>
     <string name="successed_to_save_data">Successed to save data</string>
     <string name="failed_to_save_data">Failed to save data</string>
+    <string name="successed_to_delete_data">Successed to delete data</string>
+    <string name="failed_to_delete_data">Failed to delete data</string>
     <string name="get_data_from_server">Get data from server</string>
     <string name="successed_to_get_data">Successed to get data</string>
     <string name="failed_to_get_data">Failed to get data</string>

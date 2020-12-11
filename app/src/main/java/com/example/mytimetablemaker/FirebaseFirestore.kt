@@ -18,7 +18,6 @@ class FirebaseFirestore {
     private val timetable = Timetable()
     private val setting = Setting()
     private val maxchangeline = 2
-
     private val goorbackarray: Array<String> = arrayOf("back1", "go1", "back2", "go2")
 
     //サーバーからデータ取得するダイアログの表示
@@ -127,10 +126,51 @@ class FirebaseFirestore {
         val userid: String = Firebase.auth.currentUser!!.uid
         val userdb: DocumentReference =  FirebaseFirestore.getInstance().collection("users").document(userid)
         val ref: DocumentReference = userdb.collection("goorback").document(goorback)
-        val timetablehour: TimetableHour = setTimetableHour(goorback, linenumber, day)
         val timetableref: DocumentReference = ref.collection("timetable")
             .document("timetable${linenumber + 1}${day.weekDayOrEnd}")
-        batch.set(timetableref, timetablehour)
+        batch.set(timetableref, setTimetableHour(goorback, linenumber, day))
+    }
+
+    //サーバーのデータを削除
+    fun deleteFirestore() {
+        val batch: WriteBatch = FirebaseFirestore.getInstance().batch()
+        deleteUserId(batch)
+        (0..3).forEach { i: Int ->
+            (0..2).forEach { linenumber: Int ->
+                (0..1).forEach { day: Int ->
+                    deleteTimetableFirestore(goorbackarray[i], linenumber, day, batch)
+                }
+            }
+            deleteLineInfoFirestore(goorbackarray[i], batch)
+        }
+        batch.commit()
+            .addOnSuccessListener { Toast.makeText(context, R.string.successed_to_delete_data, Toast.LENGTH_SHORT).show() }
+            .addOnFailureListener { Toast.makeText(context, R.string.failed_to_delete_data, Toast.LENGTH_SHORT).show() }
+    }
+
+    //サーバーのユーザーIDを削除
+    private fun deleteUserId(batch: WriteBatch) {
+        val userid: String = Firebase.auth.currentUser!!.uid
+        val userdb: DocumentReference =  FirebaseFirestore.getInstance().collection("users").document(userid)
+        batch.delete(userdb)
+    }
+
+    //サーバーの路線データを削除
+    private fun deleteLineInfoFirestore(goorback: String, batch: WriteBatch){
+        val userid: String = Firebase.auth.currentUser!!.uid
+        val userdb: DocumentReference =  FirebaseFirestore.getInstance().collection("users").document(userid)
+        val ref: DocumentReference = userdb.collection("goorback").document(goorback)
+        batch.delete(ref)
+    }
+
+    //サーバーの時刻表データを削除
+    private fun deleteTimetableFirestore(goorback: String, linenumber: Int, day: Int, batch: WriteBatch){
+        val userid: String = Firebase.auth.currentUser!!.uid
+        val userdb: DocumentReference =  FirebaseFirestore.getInstance().collection("users").document(userid)
+        val ref: DocumentReference = userdb.collection("goorback").document(goorback)
+        val timetableref: DocumentReference = ref.collection("timetable")
+            .document("timetable${linenumber + 1}${day.weekDayOrEnd}")
+        batch.delete(timetableref)
     }
 
     //
