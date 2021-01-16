@@ -1,7 +1,8 @@
 package com.example.mytimetablemaker
 
 //時刻表タイトルを取得
-fun String.timeTableTitle(arrivestation: String) = "($this ${R.string.koron.strings} $arrivestation${R.string.houmen.strings})"
+fun String.timeTableTitle(arrivestation: String) =
+        "($this ${R.string.koron.strings} $arrivestation${R.string.houmen.strings})"
 
 //内部ストレージに保存された各時間の時刻表データをStringとして取得
 fun String.timeTableKey(i: Int, hour: Int, currentday: Int): String =

@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import com.example.mytimetablemaker.databinding.FragmentVarioussettingsBinding
 
 //各種設定
+@Suppress("SameParameterValue")
 class VariousSettingsFragment: Fragment() {
 
     private val setting = Setting()

@@ -1,5 +1,6 @@
 package com.example.mytimetablemaker
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import com.google.android.gms.ads.AdListener
@@ -12,6 +13,7 @@ class AdMobClass {
 
     private val adappid: String = "ca-app-pub-1585283309075901~2388370986"
 
+    @SuppressLint("MissingPermission")
     fun setAdMob(adview: AdView, context: Context) {
         //Admob広告
         MobileAds.initialize(context, adappid)

@@ -1,0 +1,19 @@
+{
+  "destination":"テクノFRONT",
+  "back1":{
+    "linenumber":3,
+    "walktime":[8, 5, 5, 15]
+  },
+  "back2":{
+    "linenumber":3,
+    "walktime":[13, 5, 5, 15]
+  },
+  "go1":{
+    "linenumber":3,
+    "walktime":[15, 5, 5, 8]
+  },
+  "go2":{
+    "linenumber":3,
+    "walktime":[15, 5, 5, 13]
+  }
+}
