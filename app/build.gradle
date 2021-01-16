@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 30
-    buildToolsVersion '30.0.2'
+    buildToolsVersion '30.0.3'
 
     defaultConfig {
         applicationId "com.mytimetablemaker"
@@ -12,7 +12,7 @@ android {
         targetSdkVersion 30
         versionCode 31
         versionName "1.3.1"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runer.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -23,7 +23,7 @@ android {
     }
 
     buildFeatures {
-        dataBinding = true
+//        dataBinding = true
         viewBinding = true
     }
 
@@ -64,11 +64,11 @@ dependencies {
     //Firebase Analytics
     implementation 'com.google.firebase:firebase-analytics'
     //Firebase ユーザー認証
-    implementation 'com.google.firebase:firebase-auth:20.0.1'
+    implementation 'com.google.firebase:firebase-auth:20.0.2'
     implementation 'com.google.firebase:firebase-auth-ktx'
     //Firebase Database
-    implementation 'com.google.firebase:firebase-database:19.5.1'
-    implementation 'com.google.firebase:firebase-firestore:22.0.0'
+    implementation 'com.google.firebase:firebase-database:19.6.0'
+    implementation 'com.google.firebase:firebase-firestore:22.0.1'
     //Firebase UI (Used in FirebaseUIActivity
     implementation 'com.firebaseui:firebase-ui-auth:6.3.0'
 }

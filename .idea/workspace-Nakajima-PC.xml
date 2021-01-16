@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="37f91969-cb39-4289-a3d6-02195bf499ad" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mytimetablemaker/EmailAuthActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mytimetablemaker/EmailAuthActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mytimetablemaker/FirebaseFirestore.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mytimetablemaker/FirebaseFirestore.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mytimetablemaker/SettingsFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mytimetablemaker/SettingsFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values-ja-rJP/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values-ja-rJP/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin File" />
+        <option value="Kotlin Class" />
+      </list>
+    </option>
+  </component>
+  <component name="GenerateSignedApkSettings">
+    <option name="EXPORT_PRIVATE_KEY" value="false" />
+    <option name="KEY_STORE_PATH" value="C:\Users\Masao\OneDrive\Document\Apps\keystore\upload-keystore.jks" />
+    <option name="KEY_ALIAS" value="key0" />
+    <option name="REMEMBER_PASSWORDS" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="KotlinCodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="ProjectId" id="1kNIDw7ilCn73xh0PLZ6BHwmJcL" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="BundleExportedModule" value="mytimetablemaker.app" />
+    <property name="ExportApk.ApkPath" value="C:\Users\Masao\OneDrive\Document\Apps\AndroidStudioProjects\mytimetablemaker\app" />
+    <property name="ExportApk.BuildVariants" value="release" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/java/com/example/mytimetablemaker" />
+    <property name="project.structure.last.edited" value="SDK Location" />
+    <property name="project.structure.proportion" value="0.17" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.externalResources" />
+  </component>
+  <component name="PsdUISettings">
+    <option name="LAST_EDITED_BUILD_TYPE" value="release" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
+      <recent name="com.example.mytimetablemaker" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Nakajima\OneDrive\Document\Apps\AndroidStudioProjects\mytimetablemaker\app\src\main\java\com\example\mytimetablemaker" />
+      <recent name="C:\Users\Nakajima\OneDrive\Document\Apps\AndroidStudioProjects\mytimetablemaker\app\src\main\res\layout" />
+      <recent name="C:\Users\Nakajima\OneDrive\Document\Apps\AndroidStudioProjects\mytimetablemaker\app\src\main\res" />
+      <recent name="C:\Users\Nakajima\OneDrive\Document\Apps\AndroidStudioProjects\mytimetablemaker\app\src\main\res\values" />
+      <recent name="C:\Users\Nakajima\OneDrive\Document\Apps\AndroidStudioProjects\mytimetablemaker\app\src\main\res\drawable-v24" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Nakajima\OneDrive\Document\Apps\AndroidStudioProjects\mytimetablemaker\app\src\main\res\drawable" />
+      <recent name="C:\Users\Nakajima\OneDrive\Document\Apps\AndroidStudioProjects\mytimetablemaker\app\src\main\res\drawable-v24" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="mytimetablemaker.app" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="37f91969-cb39-4289-a3d6-02195bf499ad" name="Default Changelist" comment="" />
+      <created>1605534505647</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1605534505647</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Initial Commit">
+      <created>1605536342945</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1605536342945</updated>
+    </task>
+    <task id="LOCAL-00002" summary="v1.2.5">
+      <created>1605621707852</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1605621707852</updated>
+    </task>
+    <task id="LOCAL-00003" summary="v1.2.5">
+      <created>1605623419999</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1605623419999</updated>
+    </task>
+    <task id="LOCAL-00004" summary="v1.2.6">
+      <created>1605708000368</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1605708000369</updated>
+    </task>
+    <task id="LOCAL-00005" summary="v1.2.7 FirebaseAuth, ViewBinding">
+      <created>1606558233006</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1606558233007</updated>
+    </task>
+    <task id="LOCAL-00006" summary="v1.2.7 FirebaseAuth, ViewBinding">
+      <created>1606562907290</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1606562907290</updated>
+    </task>
+    <task id="LOCAL-00007" summary="v1.2.7 set Cloud Firestore">
+      <created>1606835821107</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1606835821107</updated>
+    </task>
+    <task id="LOCAL-00008" summary="v1.2.7 get CloudFirestore">
+      <created>1606920318478</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1606920318478</updated>
+    </task>
+    <task id="LOCAL-00009" summary="v1.2.7 finish CloudFirestore">
+      <created>1607010386726</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1607010386727</updated>
+    </task>
+    <task id="LOCAL-00010" summary="v1.2.7 finish CloudFirestore">
+      <created>1607010733690</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1607010733690</updated>
+    </task>
+    <task id="LOCAL-00011" summary="v1.3.1 初回ログイン時にサーバーデータが取得できないバグを修正">
+      <created>1607348650218</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1607348650219</updated>
+    </task>
+    <task id="LOCAL-00012" summary="v1.3.1 初回ログイン時にサーバーデータが取得できないバグを修正">
+      <created>1607351931542</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1607351931542</updated>
+    </task>
+    <task id="LOCAL-00013" summary="v1.3.1 初回ログイン時にサーバーデータが取得できないバグを修正">
+      <created>1607438430522</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1607438430522</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Initial Commit" />
+    <MESSAGE value="v1.2.5" />
+    <MESSAGE value="v1.2.6" />
+    <MESSAGE value="v1.2.7 FirebaseAuth, ViewBinding" />
+    <MESSAGE value="v1.2.7 set Cloud Firestore" />
+    <MESSAGE value="v1.2.7 get CloudFirestore" />
+    <MESSAGE value="v1.2.7 finish CloudFirestore" />
+    <MESSAGE value="v1.3.1 初回ログイン時にサーバーデータが取得できないバグを修正" />
+    <option name="LAST_COMMIT_MESSAGE" value="v1.3.1 初回ログイン時にサーバーデータが取得できないバグを修正" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="363" y="226" key="#PSD" timestamp="1607642061912">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="290" y="200" key="#PSD/0.0.1536.930@0.0.1536.930" timestamp="1607010669018" />
+    <state x="363" y="226" key="#PSD/0.0.1920.1050@0.0.1920.1050" timestamp="1607642061912" />
+    <state x="552" y="165" key="#Plugins" timestamp="1607525507598">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="552" y="165" key="#Plugins/0.0.1920.1050@0.0.1920.1050" timestamp="1607525507598" />
+    <state x="453" y="204" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1607004905033">
+      <screen x="0" y="0" width="1536" height="930" />
+    </state>
+    <state x="453" y="204" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1536.930@0.0.1536.930" timestamp="1607004905033" />
+    <state x="503" y="215" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1606031060032">
+      <screen x="0" y="0" width="1536" height="930" />
+    </state>
+    <state x="503" y="215" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.930@0.0.1536.930" timestamp="1606031060032" />
+    <state x="609" y="281" key="AndroidCreateXmlResourceDialog" timestamp="1606548437546">
+      <screen x="0" y="0" width="1536" height="930" />
+    </state>
+    <state x="609" y="281" key="AndroidCreateXmlResourceDialog/0.0.1536.930@0.0.1536.930" timestamp="1606548437546" />
+    <state x="361" y="71" key="CommitChangelistDialog2" timestamp="1607438220332">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="289" y="63" key="CommitChangelistDialog2/0.0.1536.930@0.0.1536.930" timestamp="1607351928771" />
+    <state x="361" y="71" key="CommitChangelistDialog2/0.0.1920.1050@0.0.1920.1050" timestamp="1607438220332" />
+    <state x="691" y="252" key="FileChooserDialogImpl" timestamp="1607356687609">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="553" y="223" key="FileChooserDialogImpl/0.0.1536.930@0.0.1536.930" timestamp="1605709265215" />
+    <state x="691" y="252" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1607356687609" />
+    <state x="785" y="409" width="288" height="317" key="Github.ShareDialog" timestamp="1607438753952">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="628" y="362" width="288" height="317" key="Github.ShareDialog/0.0.1536.930@0.0.1536.930" timestamp="1605535196016" />
+    <state x="785" y="409" key="Github.ShareDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1607438753952" />
+    <state x="399" y="174" key="Github.UntrackedFilesDialog" timestamp="1605535206905">
+      <screen x="0" y="0" width="1536" height="930" />
+    </state>
+    <state x="399" y="174" key="Github.UntrackedFilesDialog/0.0.1536.930@0.0.1536.930" timestamp="1605535206905" />
+    <state width="1340" height="240" key="GridCell.Tab.0.bottom" timestamp="1607525616187">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1491" height="79" key="GridCell.Tab.0.bottom/0.0.1536.930@0.0.1536.930" timestamp="1607347913883" />
+    <state width="1340" height="240" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1607525616187" />
+    <state width="1340" height="240" key="GridCell.Tab.0.center" timestamp="1607525616187">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1491" height="79" key="GridCell.Tab.0.center/0.0.1536.930@0.0.1536.930" timestamp="1607347913883" />
+    <state width="1340" height="240" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1607525616187" />
+    <state width="1340" height="240" key="GridCell.Tab.0.left" timestamp="1607525616186">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1491" height="79" key="GridCell.Tab.0.left/0.0.1536.930@0.0.1536.930" timestamp="1607347913882" />
+    <state width="1340" height="240" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1607525616186" />
+    <state width="1340" height="240" key="GridCell.Tab.0.right" timestamp="1607525616187">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1491" height="79" key="GridCell.Tab.0.right/0.0.1536.930@0.0.1536.930" timestamp="1607347913883" />
+    <state width="1340" height="240" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1607525616187" />
+    <state width="1491" height="293" key="GridCell.Tab.1.bottom" timestamp="1607302424507">
+      <screen x="0" y="0" width="1536" height="930" />
+    </state>
+    <state width="1491" height="293" key="GridCell.Tab.1.bottom/0.0.1536.930@0.0.1536.930" timestamp="1607302424507" />
+    <state width="1491" height="293" key="GridCell.Tab.1.center" timestamp="1607302424506">
+      <screen x="0" y="0" width="1536" height="930" />
+    </state>
+    <state width="1491" height="293" key="GridCell.Tab.1.center/0.0.1536.930@0.0.1536.930" timestamp="1607302424506" />
+    <state width="1491" height="293" key="GridCell.Tab.1.left" timestamp="1607302424506">
+      <screen x="0" y="0" width="1536" height="930" />
+    </state>
+    <state width="1491" height="293" key="GridCell.Tab.1.left/0.0.1536.930@0.0.1536.930" timestamp="1607302424506" />
+    <state width="1491" height="293" key="GridCell.Tab.1.right" timestamp="1607302424506">
+      <screen x="0" y="0" width="1536" height="930" />
+    </state>
+    <state width="1491" height="293" key="GridCell.Tab.1.right/0.0.1536.930@0.0.1536.930" timestamp="1607302424506" />
+    <state x="709" y="165" key="SettingsEditor" timestamp="1607437377668">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="709" y="165" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1607437377668" />
+    <state x="456" y="227" key="Vcs.Push.Dialog.v2" timestamp="1607439032055">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="365" y="201" key="Vcs.Push.Dialog.v2/0.0.1536.930@0.0.1536.930" timestamp="1607351975306" />
+    <state x="456" y="227" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1607439032055" />
+    <state x="496" y="111" key="refactoring.ChangeSignatureDialog" timestamp="1606218285915">
+      <screen x="0" y="0" width="1536" height="930" />
+    </state>
+    <state x="496" y="111" key="refactoring.ChangeSignatureDialog/0.0.1536.930@0.0.1536.930" timestamp="1606218285915" />
+    <state x="430" y="217" key="run.anything.popup" timestamp="1607149469119">
+      <screen x="0" y="0" width="1536" height="930" />
+    </state>
+    <state x="430" y="217" key="run.anything.popup/0.0.1536.930@0.0.1536.930" timestamp="1607149469119" />
+    <state x="435" y="205" width="672" height="678" key="search.everywhere.popup" timestamp="1607207141890">
+      <screen x="0" y="0" width="1536" height="930" />
+    </state>
+    <state x="435" y="205" width="672" height="678" key="search.everywhere.popup/0.0.1536.930@0.0.1536.930" timestamp="1607207141890" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="app">
+        <watch expression="this.`shadow$_klass_`" language="kotlin" custom="import android.view.View.OnClickListener" />
+        <watch expression="((Class)((zzu)task).shadow$_klass_).name" custom="com.google.android.gms.tasks.zzu,java.lang.Class" />
+        <watch expression="document" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>
