@@ -131,7 +131,7 @@
     <string name="root2displaytitle">Displaying route 2</string>
     <string name="varioussettingtitle">Various settings</string>
     <string name="information">About</string>
-    <string name="privacypolicy">Terms and privacy policy</string>
+    <string name="privacypolicy"><u>Terms and privacy policy</u></string>
     <string name="settingmethod">How to setup</string>
     <string name="linkcollection">Links for setting up timetable</string>
     <string name="version">Version</string>
@@ -222,42 +222,81 @@
     <string name="picturebutton">Select your timetable picture</string>
     <string name="timetablehint">Enter 0～59 [min] separated by a space</string>
 
-    //Firebase
+    //FirebaseAuth
     <string name="account">Account</string>
-    <string name="sign_in">Sign In</string>
-    <string name="sign_out">Sign Out</string>
-    <string name="logging_in">Logging in</string>
-    <string name="logged_out">Logged out</string>
-    <string name="create_account">Create Account</string>
-    <string name="signed_out">Signed Out</string>
-    <string name="created_your_account">Created your account</string>
-    <string name="deleteaccount">Delete your account</string>
-    <string name="forget_password">Forget your password</string>
-    <string name="reset_password">Reset your password?</string>
-    <string name="sent_reset_mail">Sent a password reset mail</string>
-    <string name="failed_to_sent_reset_mail">Failed to send a password reset mail</string>
-    <string name="failed_to_creat_account">Failed to create your account</string>
-    <string name="sent_authmail">Sent　an　authentication　email</string>
-    <string name="failed_to_sent_authmail">Failed to sent　an　authentication　email</string>
-    <string name="delete_your_account">Deleted your account</string>
-    <string name="failed_to_delete_account">Failed to delete your account</string>
-    <string name="verify_email">Verify your account</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirmpassword">Confirm Password</string>
     <string name="hint_email">Enter your email address</string>
     <string name="hint_password">Enter your password</string>
-    <string name="auth_failed">Authentication failed</string>
-    <string name="auth_successed">Authentication successed</string>
-    <string name="auth_mail_check">Check an authentication mail</string>
-    <string name="save_data_to_server">Save data to server</string>
-    <string name="successed_to_save_data">Successed to save data</string>
-    <string name="failed_to_save_data">Failed to save data</string>
-    <string name="successed_to_delete_data">Successed to delete data</string>
-    <string name="failed_to_delete_data">Failed to delete data</string>
-    <string name="get_data_from_server">Get data from server</string>
-    <string name="successed_to_get_data">Successed to get data</string>
-    <string name="failed_to_get_data">Failed to get data</string>
-    <string name="overwirrten_byserverdata">Will be overwritten by the data on server</string>
-    <string name="overwirrten_serverdata">Your data on server will be overwritten</string>
-    <string name="signout_your_account_q">Sign out your account?</string>
-    <string name="delete_your_account_q">Delete your account?</string>
+    <string name="hint_confirmpassword">Enter your confirm password</string>
+
+    //Login
+    <string name="login">Login</string>
+    <string name="login_successfully">Login successfully</string>
+    <string name="login_error">Login error</string>
+    <string name="not_verified_account">Not verified account</string>
+    <string name="auth_mail_check">Check your email</string>
+
+    //Sign Up
+    <string name="create_account">Create Account</string>
+    <string name="signup">Sign Up</string>
+    <string name="signup_successfully">Sign up successfully</string>
+    <string name="signup_error">Sign up error</string>
+    <string name="send_authmail">Send a verification email?</string>
+    <string name="send_auth_mail_successfully">Verification email Sent successfully</string>
+    <string name="send_auth_mail_unsuccessfully">Verification email could not be sent</string>
+
+    //Input Error
+    <string name="incorrect_email">Incorrect email</string>
+    <string name="incorrect_password">Incorrect password</string>
+    <string name="incorrect_email_or_password">Incorrect email or password</string>
+    <string name="incorrect_email_format">Incorrect email format</string>
+    <string name="confirmpassword_not_match">"Confirm password don't match"</string>
+
+    //Auth Error
+    <string name="email_not_registered">This email is not registered</string>
+    <string name="account_disabled">This account is disabled</string>
+    <string name="email_already_registered">This email has already been registered</string>
+    <string name="password_over_6_characters">Password must be at least 6 characters</string>
+
+    //Password Reset
+    <string name="forget_password"><u>Forget your password</u></string>
+    <string name="password_reset">Password Reset</string>
+    <string name="password_reset_error">Password reset error</string>
+    <string name="reset_password">Reset your password?</string>
+    <string name="send_reset_mail_successfully">Password reset email Sent successfully</string>
+    <string name="send_reset_mail_unsuccessfully">Password reset email could not be sent</string>
+
+    //Logout
+    <string name="logout">Logout</string>
+    <string name="logged_out">Logged out</string>
+    <string name="logout_account">Logout your account?</string>
+
+    //Delete Account
+    <string name="delete_your_account">Delete Account</string>
+    <string name="delete_account_error">Delete account error</string>
+    <string name="delete_account">Deleted your account?</string>
+    <string name="delete_account_successfully">Account deleted successfully</string>
+    <string name="delete_account_unsuccessfully">Account could not be deleted</string>
+
+    //Get data from Firestore
+    <string name="get_saved_data">Get saved data</string>
+    <string name="overwritten_current_data">Overwritten current data?</string>
+    <string name="get_data_error">Data got error</string>
+    <string name="get_data_successfully">Data got successfully</string>
+    <string name="get_data_unsuccessfully">Data could not be got</string>
+
+    //Save data to Firestore
+    <string name="save_current_data">Save current data</string>
+    <string name="overwritten_saved_data">Overwritten saved data？</string>
+    <string name="save_data_error">Data saved error</string>
+    <string name="save_data_successfully">Data saved successfully</string>
+    <string name="save_data_unsuccessfully">Data could not be saved</string>
+
+    //Delete data in Firestore
+    <string name="delete_data_error">Data deleted error</string>
+    <string name="delete_data_successfully">Data deleted successfully</string>
+    <string name="delete_data_unsuccessfully">Data could not be deleted</string>
 
 </resources>

@@ -46,16 +46,20 @@ class MainActivity: AppCompatActivity() {
 
         //＜日付および時刻に関する設定＞
 
-        //時刻の停止ボタンの設定（時刻が止まってない場合）
-        binding.timestopbutton.setOnClickListener {
-            if (timeflag) {
-                timeflag = mainview.changeStartStop(binding.timestopbutton, binding.timestartbutton, true)
-            }
-        }
         //時刻の開始ボタンの設定（時刻が止まっている場合）
         binding.timestartbutton.setOnClickListener {
             if (!timeflag) {
-                timeflag = mainview.changeStartStop(binding.timestartbutton, binding.timestopbutton, false)
+                timeflag = true
+                binding.timestartbutton.isEnabled = true
+                binding.timestopbutton.isEnabled = false
+            }
+        }
+        //時刻の停止ボタンの設定（時刻が止まってない場合）
+        binding.timestopbutton.setOnClickListener {
+            if (timeflag) {
+                timeflag = false
+                binding.timestartbutton.isEnabled = false
+                binding.timestopbutton.isEnabled = true
             }
         }
         //日付の選択および表示（時刻が止まっている場合）
@@ -73,17 +77,24 @@ class MainActivity: AppCompatActivity() {
 
         //帰宅画面から外出画面に遷移するときの表示変更
         binding.gobutton.setOnClickListener {
-            if (gobackflag) {gobackflag =
-                    mainview.changeGoBack(binding.gobutton, binding.backbutton, true)}
-            goorback1 = "go1"
-            goorback2 = "go2"
+            if (gobackflag) {
+                gobackflag = false
+                binding.backbutton.isEnabled = false
+                binding.gobutton.isEnabled = true
+                goorback1 = "go1"
+                goorback2 = "go2"
+            }
         }
+
         //外出画面から帰宅画面に遷移するときの表示変更
         binding.backbutton.setOnClickListener {
-            if (!gobackflag) {gobackflag =
-                    mainview.changeGoBack(binding.backbutton, binding.gobutton, false)}
-            goorback1 = "back1"
-            goorback2 = "back2"
+            if (!gobackflag) {
+                gobackflag = true
+                binding.backbutton.isEnabled = true
+                binding.gobutton.isEnabled = false
+                goorback1 = "back1"
+                goorback2 = "back2"
+            }
         }
 
         runnable = Runnable {

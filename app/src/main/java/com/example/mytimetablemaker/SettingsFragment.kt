@@ -1,5 +1,7 @@
 package com.example.mytimetablemaker
 
+import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.mytimetablemaker.databinding.FragmentSettingsBinding
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -16,7 +19,8 @@ import com.google.firebase.ktx.Firebase
 class SettingsFragment : Fragment() {
 
     //クラスの呼び出し
-    private val emailauth = EmailAuth(Firebase.auth)
+    private var auth: FirebaseAuth = Firebase.auth
+    private val emailauth = EmailAuth(auth)
     private val setting = Setting()
     private val firebasefirestore = FirebaseFirestore()
     private val goorbackarray: Array<String> = arrayOf("back1", "go1", "back2", "go2")
@@ -98,14 +102,12 @@ class SettingsFragment : Fragment() {
 
         //サインアウト
         binding.signoutbutton.setOnClickListener {
-            startActivity(emailauth.intentSignOut())
+            logoutAccount(requireContext())
         }
 
         //アカウントの削除
         binding.deleteaccountbutton.setOnClickListener {
-            if (emailauth.intentDeleteAccount(requireContext()) != null ) {
-                startActivity(emailauth.intentDeleteAccount(requireContext()))
-            }
+            deleteAccount(requireContext())
         }
 
         //利用規約・プライバシーポリシー
@@ -118,5 +120,43 @@ class SettingsFragment : Fragment() {
         //private val versionCodes: Int = BuildConfig.VERSION_CODE
 
         return binding.root
+    }
+
+    //ログアウト
+    private fun logoutAccount(context: Context) {
+        AlertDialog.Builder(context).apply {
+            setTitle(R.string.logout.strings)
+            setMessage(R.string.logout_account.strings)
+            setNegativeButton(R.string.ok) { _, _ ->
+                emailauth.afterLogoutAccount()
+                startActivity(emailauth.intentToEmailAuthActivity())
+            }
+            setPositiveButton(R.string.cancel, null)
+            show()
+        }
+    }
+
+    //アカウント削除
+    private fun deleteAccount(context: Context) {
+        AlertDialog.Builder(context).apply {
+            setTitle(R.string.delete_your_account.strings)
+            setMessage(R.string.delete_account.strings)
+            setNegativeButton(R.string.ok) { _, _ ->
+                auth.currentUser?.delete()?.addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        emailauth.afterDeleteAccount()
+                        startActivity(emailauth.intentToEmailAuthActivity())
+                    } else {
+                        emailauth.makeAuthAlert(
+                            context,
+                            R.string.delete_account_error.strings,
+                            R.string.delete_account_unsuccessfully.strings
+                        )
+                    }
+                }
+            }
+            setPositiveButton(R.string.cancel, null)
+            show()
+        }
     }
 }

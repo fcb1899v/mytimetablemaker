@@ -1,5 +1,7 @@
 package com.example.mytimetablemaker
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mytimetablemaker.databinding.ActivityEmailauthBinding
@@ -28,17 +30,21 @@ class EmailAuthActivity : AppCompatActivity() {
 
         //一度サインインしたらログイン画面をスキップ
         if (useremail != "null") {
-            startActivity(emailauth.intentSignInChangeActivity())
-        }
-
-        //アカウント登録
-        binding.emailCreateAccountButton.setOnClickListener {
-            emailauth.createAccount(binding.fieldEmail.text.toString(), binding.fieldPassword.text.toString())
+            startActivity(emailauth.intentToMainActivity())
         }
 
         //サインイン
         binding.emailSignInButton.setOnClickListener {
-            signInAccount(binding.fieldEmail.text.toString(), binding.fieldPassword.text.toString())
+            loginAccount(
+                this,
+                binding.fieldEmail.text.toString(),
+                binding.fieldPassword.text.toString()
+            )
+        }
+
+        //アカウント登録
+        binding.emailSignUpButton.setOnClickListener {
+            startActivity(Intent(this, EmailSignUpActivity::class.java))
         }
 
         //パスワードリセット
@@ -46,23 +52,17 @@ class EmailAuthActivity : AppCompatActivity() {
             emailauth.sendPasswordResetMailDialog(this)
         }
 
-        //利用規約・プライバシーポリシー
-        binding.topprivacypolicy.setOnClickListener {
-            startActivity(emailauth.intentPrivacyPolicy())
-        }
-
         //AdMob
         admobclass.setAdMob(binding.topadview, this)
     }
 
-    // サインイン処理
-    private fun signInAccount(email: String, password: String) {
-        if (email.isNotEmpty() && password.isNotEmpty()) {
+    // ログイン処理
+    private fun loginAccount(context: Context, email: String, password: String) {
+        if (emailauth.loginToast(email, password)) {
             auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task: Task<AuthResult> ->
-                emailauth.signInMessage(task, email, password)
-                if (task.isSuccessful && auth.currentUser!!.isEmailVerified) {
-                    firebasefirestore.getFirestoreAtSignIn()
-                    startActivity(emailauth.intentSignInChangeActivity())
+                if (emailauth.loginMessage(this, task)) {
+                    firebasefirestore.getFirestoreAtSignIn(context)
+                    startActivity(emailauth.intentToMainActivity())
                 }
             }
         }

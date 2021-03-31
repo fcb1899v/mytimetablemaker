@@ -25,17 +25,26 @@ class MainView {
         return dateFormat.parse(date)
     }
 
-    //開始ボタンおよび停止ボタンを押したときの表示変更をする関数
-    fun changeStartStop(button1: Button, button2: Button, timeflag: Boolean): Boolean {
-        button1.setTextColor(R.string.coloraccent.setColor)
-        button2.setTextColor(R.string.lightgray.setColor)
-        return !timeflag
+    //ONボタン:押したとき表示変更をする関数
+    fun tapOnButton(onbutton: Button, offbutton: Button, onoffflag: Boolean): Boolean {
+        return if (!onoffflag) {
+            onbutton.isEnabled = !onbutton.isEnabled
+            offbutton.isEnabled = !offbutton.isEnabled
+            true
+        } else {
+            false
+        }
     }
-    //帰宅ボタンおよび外出ボタンを押したときの表示変更をする関数
-    fun changeGoBack(button1: Button, button2: Button, timeflag: Boolean): Boolean {
-        button1.setTextColor(R.string.primarydark.setColor)
-        button2.setTextColor(R.string.lightgray.setColor)
-        return !timeflag
+
+    //OFFボタン:押したとき表示変更をする関数
+    fun tapOffButton(onbutton: Button, offbutton: Button, onoffflag: Boolean): Boolean {
+        return if (onoffflag) {
+            onbutton.isEnabled = !onbutton.isEnabled
+            offbutton.isEnabled = !offbutton.isEnabled
+            false
+        } else {
+            true
+        }
     }
 
     //MainActivityの表示された曜日をInt型で取得(日：0、月：1、火：2、水：3、木：4、金：5、土：6)
