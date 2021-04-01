@@ -1,7 +1,6 @@
 package com.example.mytimetablemaker
 
 import android.text.format.DateFormat.getBestDateTimePattern
-import android.widget.Button
 import androidx.preference.PreferenceManager
 import com.example.mytimetablemaker.Application.Companion.context
 import java.text.SimpleDateFormat
@@ -24,35 +23,6 @@ class MainView {
         val dateFormat = SimpleDateFormat(format, local)
         return dateFormat.parse(date)
     }
-
-    //ONボタン:押したとき表示変更をする関数
-    fun tapOnButton(onbutton: Button, offbutton: Button, onoffflag: Boolean): Boolean {
-        return if (!onoffflag) {
-            onbutton.isEnabled = !onbutton.isEnabled
-            offbutton.isEnabled = !offbutton.isEnabled
-            true
-        } else {
-            false
-        }
-    }
-
-    //OFFボタン:押したとき表示変更をする関数
-    fun tapOffButton(onbutton: Button, offbutton: Button, onoffflag: Boolean): Boolean {
-        return if (onoffflag) {
-            onbutton.isEnabled = !onbutton.isEnabled
-            offbutton.isEnabled = !offbutton.isEnabled
-            false
-        } else {
-            true
-        }
-    }
-
-    //MainActivityの表示された曜日をInt型で取得(日：0、月：1、火：2、水：3、木：4、金：5、土：6)
-    //fun getDayOfWeekInt(displaydate: String): Int {
-    //祝日
-    //val gcalendar = CalendarApp.getCalenderById("ja.japanese#holiday@group.v.calender.google.com")
-    //if (gcalender.getEventsForDay(date).length > 0) { return 7 }　//祝：7
-    //}
 
     //設定画面のルート2を表示するSwitchPreferenceの状態に応じたBooleanを読み出す関数
     fun getRoot2Switch(goorback: String): Boolean {

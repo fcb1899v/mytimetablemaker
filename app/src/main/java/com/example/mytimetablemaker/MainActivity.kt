@@ -22,14 +22,6 @@ class MainActivity: AppCompatActivity() {
     private val admobclass = AdMobClass()
     private val calendar: Calendar = Calendar.getInstance()
 
-    //時刻を止めるためのフラグ
-    private var timeflag = true
-
-    //帰宅と外出を示すフラグ
-    private var gobackflag = true
-    private var goorback1 = "back1"
-    private var goorback2 = "back2"
-
     //ViewBinding
     private lateinit var binding: ActivityMainBinding
 
@@ -39,6 +31,14 @@ class MainActivity: AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //時刻を止めるためのフラグ
+        var timeflag = true
+
+        //帰宅と外出を示すフラグ
+        var gobackflag = true
+        var goorback1 = "back1"
+        var goorback2 = "back2"
+
         //設定画面に移動
         binding.settingimageview.setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
@@ -46,20 +46,20 @@ class MainActivity: AppCompatActivity() {
 
         //＜日付および時刻に関する設定＞
 
-        //時刻の開始ボタンの設定（時刻が止まっている場合）
-        binding.timestartbutton.setOnClickListener {
-            if (!timeflag) {
-                timeflag = true
-                binding.timestartbutton.isEnabled = true
-                binding.timestopbutton.isEnabled = false
-            }
-        }
         //時刻の停止ボタンの設定（時刻が止まってない場合）
         binding.timestopbutton.setOnClickListener {
             if (timeflag) {
                 timeflag = false
-                binding.timestartbutton.isEnabled = false
-                binding.timestopbutton.isEnabled = true
+                binding.timestartbutton.setBackgroundResource(R.drawable.offbutton)
+                binding.timestopbutton.setBackgroundResource(R.drawable.onbutton)
+            }
+        }
+        //時刻の開始ボタンの設定（時刻が止まっている場合）
+        binding.timestartbutton.setOnClickListener {
+            if (!timeflag) {
+                timeflag = true
+                binding.timestartbutton.setBackgroundResource(R.drawable.onbutton)
+                binding.timestopbutton.setBackgroundResource(R.drawable.offbutton)
             }
         }
         //日付の選択および表示（時刻が止まっている場合）
@@ -75,25 +75,24 @@ class MainActivity: AppCompatActivity() {
             }
         }
 
-        //帰宅画面から外出画面に遷移するときの表示変更
-        binding.gobutton.setOnClickListener {
-            if (gobackflag) {
-                gobackflag = false
-                binding.backbutton.isEnabled = false
-                binding.gobutton.isEnabled = true
-                goorback1 = "go1"
-                goorback2 = "go2"
-            }
-        }
-
         //外出画面から帰宅画面に遷移するときの表示変更
         binding.backbutton.setOnClickListener {
             if (!gobackflag) {
                 gobackflag = true
-                binding.backbutton.isEnabled = true
-                binding.gobutton.isEnabled = false
                 goorback1 = "back1"
                 goorback2 = "back2"
+                binding.backbutton.setBackgroundResource(R.drawable.onbutton)
+                binding.gobutton.setBackgroundResource(R.drawable.offbutton)
+            }
+        }
+        //帰宅画面から外出画面に遷移するときの表示変更
+        binding.gobutton.setOnClickListener {
+            if (gobackflag) {
+                gobackflag = false
+                goorback1 = "go1"
+                goorback2 = "go2"
+                binding.backbutton.setBackgroundResource(R.drawable.offbutton)
+                binding.gobutton.setBackgroundResource(R.drawable.onbutton)
             }
         }
 
