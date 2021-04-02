@@ -131,7 +131,7 @@
     <string name="root2displaytitle">Displaying route 2</string>
     <string name="varioussettingtitle">Various settings</string>
     <string name="information">About</string>
-    <string name="privacypolicy"><u>Terms and privacy policy</u></string>
+    <string name="privacypolicy">I have read and agree to the \n<u>terms and privacy policy</u></string>
     <string name="settingmethod">How to setup</string>
     <string name="linkcollection">Links for setting up timetable</string>
     <string name="version">Version</string>

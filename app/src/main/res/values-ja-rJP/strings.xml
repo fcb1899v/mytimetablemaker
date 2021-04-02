@@ -133,7 +133,7 @@
     <string name="root2displaytitle">ルート2の表示</string>
     <string name="varioussettingtitle">各種設定</string>
     <string name="information">このアプリについて</string>
-    <string name="privacypolicy"><u>利用規約・プライバシーポリシー</u></string>
+    <string name="privacypolicy"><u>利用規約・プライバシーポリシー</u>\nを確認しました</string>
     <string name="version">バージョン</string>
     <string name="settingmethod">アプリの設定方法</string>
     <string name="linkcollection">時刻表リンク集</string>

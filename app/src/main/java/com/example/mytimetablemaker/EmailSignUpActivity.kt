@@ -28,18 +28,29 @@ class EmailSignUpActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         //アカウント登録
-        binding.emailCreateAccountButton.setOnClickListener {
-            signupAccount(
-                this,
-                binding.fieldEmail.text.toString(),
-                binding.fieldPassword.text.toString(),
-                binding.fieldConfirmPassword.text.toString()
-            )
+        binding.signupregisterbutton.setOnClickListener {
+            if (binding.signupcheckbox.isChecked) {
+                signupAccount(
+                    this,
+                    binding.fieldEmail.text.toString(),
+                    binding.fieldPassword.text.toString(),
+                    binding.fieldConfirmPassword.text.toString()
+                )
+            }
         }
 
         //利用規約・プライバシーポリシー
         binding.signupprivacypolicy.setOnClickListener {
             startActivity(emailauth.intentPrivacyPolicy())
+        }
+
+        //利用規約・プライバシーポリシーのチェックボックスで登録ボタン解除
+        binding.signupcheckbox.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                binding.signupregisterbutton.setBackgroundResource(R.drawable.registerbutton)
+            } else {
+                binding.signupregisterbutton.setBackgroundResource(R.drawable.notbutton)
+            }
         }
 
         //AdMob

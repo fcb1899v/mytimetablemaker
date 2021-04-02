@@ -101,28 +101,43 @@
                     tools:ignore="RtlSymmetry" />
 
                 <Button
-                    android:id="@+id/emailCreateAccountButton"
+                    android:id="@+id/signupregisterbutton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="40dp"
                     android:layout_marginEnd="30dp"
-                    android:background="@drawable/registerbutton"
-                    android:text="@string/signup"
+                    android:background="@drawable/notbutton"
+                    android:text="@string/register"
                     android:textColor="@color/colorWhite"
                     android:textSize="16sp"
                     tools:ignore="ButtonStyle" />
 
-                <TextView
-                    android:id="@+id/signupprivacypolicy"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginBottom="50dp"
-                    android:gravity="center"
-                    android:text="@string/privacypolicy"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="16sp" />
+                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/signupcheckbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_gravity="center"
+                        android:theme="@style/MyCheckBox" />
+
+                    <TextView
+                        android:id="@+id/signupprivacypolicy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_gravity="center"
+                        android:text="@string/privacypolicy"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 

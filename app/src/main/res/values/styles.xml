@@ -24,5 +24,11 @@
         <item name="colorControlActivated">@color/colorAccent</item>
     </style>
 
+    <style name="MyCheckBox" parent="Theme.AppCompat.Light">
+        <!-- 枠線 -->
+        <item name="colorControlNormal">@color/colorWhite</item>
+        <!-- チェック時の色 -->
+        <item name="colorControlActivated">@color/colorPrimary</item>
+    </style>
 
 </resources>
