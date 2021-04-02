@@ -77,12 +77,12 @@
 
                     <Button
                         android:id="@+id/daybutton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="15dp"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
                         android:layout_marginEnd="15dp"
-                        android:backgroundTint="@color/colorWhite"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/weekbutton"
                         android:fontFamily="sans-serif"
                         android:orientation="horizontal"
                         android:text="@string/weekend"
@@ -963,6 +963,7 @@
                         android:id="@+id/PictureView"
                         android:layout_width="360dp"
                         android:layout_height="640dp"
+                        android:background="@drawable/customtextfield"
                         ads:srcCompat="@android:drawable/screen_background_light"
                         tools:ignore="ContentDescription" />
 

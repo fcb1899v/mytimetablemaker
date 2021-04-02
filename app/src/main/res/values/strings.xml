@@ -261,7 +261,7 @@
     <string name="password_over_6_characters">Password must be at least 6 characters</string>
 
     //Password Reset
-    <string name="forget_password"><u>Forget your password</u></string>
+    <string name="forget_password"><u>Forget password?</u></string>
     <string name="password_reset">Password Reset</string>
     <string name="password_reset_error">Password reset error</string>
     <string name="reset_password">Reset your password?</string>

@@ -54,14 +54,15 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginEnd="30dp"
                     android:autofillHints=""
-                    android:background="@color/colorWhite"
+                    android:background="@drawable/customtextfield"
                     android:hint="@string/email"
                     android:inputType="textEmailAddress"
                     android:paddingStart="15dp"
                     android:textColor="@color/colorPrimary"
                     android:textColorHint="@color/colorGray"
                     android:textSize="16sp"
-                    android:theme="@style/EditTextColorControl" />
+                    android:theme="@style/EditTextColorControl"
+                    tools:ignore="RtlSymmetry" />
 
                 <EditText
                     android:id="@+id/fieldPassword"
@@ -71,14 +72,15 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="30dp"
                     android:autofillHints=""
-                    android:background="@color/colorWhite"
+                    android:background="@drawable/customtextfield"
                     android:hint="@string/password"
                     android:inputType="textPassword"
                     android:paddingStart="15dp"
                     android:textColor="@color/colorPrimary"
                     android:textColorHint="@color/colorGray"
                     android:textSize="16sp"
-                    android:theme="@style/EditTextColorControl" />
+                    android:theme="@style/EditTextColorControl"
+                    tools:ignore="RtlSymmetry" />
 
                 <EditText
                     android:id="@+id/fieldConfirmPassword"
@@ -88,14 +90,15 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="30dp"
                     android:autofillHints=""
-                    android:background="@color/colorWhite"
+                    android:background="@drawable/customtextfield"
                     android:hint="@string/confirmpassword"
                     android:inputType="textPassword"
                     android:paddingStart="15dp"
                     android:textColor="@color/colorPrimary"
                     android:textColorHint="@color/colorGray"
                     android:textSize="16sp"
-                    android:theme="@style/EditTextColorControl" />
+                    android:theme="@style/EditTextColorControl"
+                    tools:ignore="RtlSymmetry" />
 
                 <Button
                     android:id="@+id/emailCreateAccountButton"
@@ -104,7 +107,7 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="40dp"
                     android:layout_marginEnd="30dp"
-                    android:background="@color/colorPrimary"
+                    android:background="@drawable/registerbutton"
                     android:text="@string/signup"
                     android:textColor="@color/colorWhite"
                     android:textSize="16sp"

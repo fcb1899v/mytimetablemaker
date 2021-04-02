@@ -15,7 +15,8 @@
         android:scaleType="fitEnd"
         app:layout_constraintBottom_toTopOf="@+id/primaryback"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/splash" />
+        app:srcCompat="@drawable/splash"
+        tools:ignore="ContentDescription" />
 
     <View
         android:id="@+id/primaryback"
