@@ -2,7 +2,12 @@ package com.example.mytimetablemaker
 
 import android.graphics.Color.*
 
-class CalcTime(val goorback: String, private val changeline: Int, private val currenttime: Int, val currentday: Int) {
+class CalcTime(
+        val goorback: String,
+        private val changeline: Int,
+        private val currenttime: Int,
+        val currentday: Int
+    ) {
 
     //ルート内の各路線の乗車可能時刻[0]・発車時刻[1]・到着時刻[2]を取得する関数
     val getDisplayTimeArray: Array<String> get() {
