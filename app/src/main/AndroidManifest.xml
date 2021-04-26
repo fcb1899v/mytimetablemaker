@@ -21,20 +21,20 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-1585283309075901~2388370986"
             />
-        <!--        <meta-data-->
-        <!--            android:name="com.google.android.backup.api_key"-->
-        <!--            android:value="AEdPqrEAAAAIIbKoaKEe_iu5qlg5VFJbrE3gJeQ85GUDPpw6VA"-->
-        <!--            />-->
-
         <activity
-            android:name=".SplashActivity">
+            android:name=".SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".EmailAuthActivity">
+            android:name=".EmailAuthActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".EmailSignUpActivity">
         </activity>
         <activity
             android:name=".MainActivity"

@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:background="@color/colorAccent"
+                    android:background="@color/colorGray"
                     android:gravity="center"
                     android:orientation="horizontal"
                     tools:ignore="NestedWeights">
@@ -381,7 +381,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:background="@color/colorAccent"
+                    android:background="@color/colorGray"
                     android:gravity="center"
                     android:orientation="horizontal"
                     tools:ignore="NestedWeights">
@@ -526,7 +526,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:background="@color/colorAccent"
+                    android:background="@color/colorGray"
                     android:gravity="center"
                     android:orientation="horizontal"
                     tools:ignore="NestedWeights">
@@ -671,7 +671,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:background="@color/colorAccent"
+                    android:background="@color/colorGray"
                     android:gravity="center"
                     android:orientation="horizontal"
                     tools:ignore="NestedWeights">
@@ -853,7 +853,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:background="@color/colorAccent"
+                    android:background="@color/colorGray"
                     android:gravity="center"
                     android:orientation="horizontal"
                     tools:ignore="NestedWeights">

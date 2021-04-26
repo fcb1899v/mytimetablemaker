@@ -22,14 +22,6 @@ class MainActivity: AppCompatActivity() {
     private val admobclass = AdMobClass()
     private val calendar: Calendar = Calendar.getInstance()
 
-    //時刻を止めるためのフラグ
-    private var timeflag = true
-
-    //帰宅と外出を示すフラグ
-    private var gobackflag = true
-    private var goorback1 = "back1"
-    private var goorback2 = "back2"
-
     //ViewBinding
     private lateinit var binding: ActivityMainBinding
 
@@ -38,6 +30,14 @@ class MainActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //時刻を止めるためのフラグ
+        var timeflag = true
+
+        //帰宅と外出を示すフラグ
+        var gobackflag = true
+        var goorback1 = "back1"
+        var goorback2 = "back2"
 
         //設定画面に移動
         binding.settingimageview.setOnClickListener {
@@ -49,13 +49,17 @@ class MainActivity: AppCompatActivity() {
         //時刻の停止ボタンの設定（時刻が止まってない場合）
         binding.timestopbutton.setOnClickListener {
             if (timeflag) {
-                timeflag = mainview.changeStartStop(binding.timestopbutton, binding.timestartbutton, true)
+                timeflag = false
+                binding.timestartbutton.setBackgroundResource(R.drawable.offbutton)
+                binding.timestopbutton.setBackgroundResource(R.drawable.onbutton)
             }
         }
         //時刻の開始ボタンの設定（時刻が止まっている場合）
         binding.timestartbutton.setOnClickListener {
             if (!timeflag) {
-                timeflag = mainview.changeStartStop(binding.timestartbutton, binding.timestopbutton, false)
+                timeflag = true
+                binding.timestartbutton.setBackgroundResource(R.drawable.onbutton)
+                binding.timestopbutton.setBackgroundResource(R.drawable.offbutton)
             }
         }
         //日付の選択および表示（時刻が止まっている場合）
@@ -71,19 +75,25 @@ class MainActivity: AppCompatActivity() {
             }
         }
 
-        //帰宅画面から外出画面に遷移するときの表示変更
-        binding.gobutton.setOnClickListener {
-            if (gobackflag) {gobackflag =
-                    mainview.changeGoBack(binding.gobutton, binding.backbutton, true)}
-            goorback1 = "go1"
-            goorback2 = "go2"
-        }
         //外出画面から帰宅画面に遷移するときの表示変更
         binding.backbutton.setOnClickListener {
-            if (!gobackflag) {gobackflag =
-                    mainview.changeGoBack(binding.backbutton, binding.gobutton, false)}
-            goorback1 = "back1"
-            goorback2 = "back2"
+            if (!gobackflag) {
+                gobackflag = true
+                goorback1 = "back1"
+                goorback2 = "back2"
+                binding.backbutton.setBackgroundResource(R.drawable.onbutton)
+                binding.gobutton.setBackgroundResource(R.drawable.offbutton)
+            }
+        }
+        //帰宅画面から外出画面に遷移するときの表示変更
+        binding.gobutton.setOnClickListener {
+            if (gobackflag) {
+                gobackflag = false
+                goorback1 = "go1"
+                goorback2 = "go2"
+                binding.backbutton.setBackgroundResource(R.drawable.offbutton)
+                binding.gobutton.setBackgroundResource(R.drawable.onbutton)
+            }
         }
 
         runnable = Runnable {
@@ -116,7 +126,7 @@ class MainActivity: AppCompatActivity() {
                     .commitAllowingStateLoss()
             }
 
-            val back2display: Boolean = mainview.getRoot2Switch(goorback2)
+            val back2display: Boolean = mainview.getRoute2Switch(goorback2)
             binding.goorback2fragment.visibility = if (back2display) { VISIBLE } else { GONE }
             binding.centerLine.visibility = if (back2display) { VISIBLE } else { GONE }
 

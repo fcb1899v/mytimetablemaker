@@ -1,7 +1,6 @@
 package com.example.mytimetablemaker
 
 import android.text.format.DateFormat.getBestDateTimePattern
-import android.widget.Button
 import androidx.preference.PreferenceManager
 import com.example.mytimetablemaker.Application.Companion.context
 import java.text.SimpleDateFormat
@@ -25,30 +24,10 @@ class MainView {
         return dateFormat.parse(date)
     }
 
-    //開始ボタンおよび停止ボタンを押したときの表示変更をする関数
-    fun changeStartStop(button1: Button, button2: Button, timeflag: Boolean): Boolean {
-        button1.setTextColor(R.string.coloraccent.setColor)
-        button2.setTextColor(R.string.lightgray.setColor)
-        return !timeflag
-    }
-    //帰宅ボタンおよび外出ボタンを押したときの表示変更をする関数
-    fun changeGoBack(button1: Button, button2: Button, timeflag: Boolean): Boolean {
-        button1.setTextColor(R.string.primarydark.setColor)
-        button2.setTextColor(R.string.lightgray.setColor)
-        return !timeflag
-    }
-
-    //MainActivityの表示された曜日をInt型で取得(日：0、月：1、火：2、水：3、木：4、金：5、土：6)
-    //fun getDayOfWeekInt(displaydate: String): Int {
-    //祝日
-    //val gcalendar = CalendarApp.getCalenderById("ja.japanese#holiday@group.v.calender.google.com")
-    //if (gcalender.getEventsForDay(date).length > 0) { return 7 }　//祝：7
-    //}
-
     //設定画面のルート2を表示するSwitchPreferenceの状態に応じたBooleanを読み出す関数
-    fun getRoot2Switch(goorback: String): Boolean {
+    fun getRoute2Switch(goorback: String): Boolean {
         val key = "${goorback}switch"
-        val defaultflag = false
+        val defaultflag = true
         return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, defaultflag)
     }
 

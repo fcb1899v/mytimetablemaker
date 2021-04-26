@@ -134,6 +134,8 @@
     <string name="varioussettingtitle">各種設定</string>
     <string name="information">このアプリについて</string>
     <string name="privacypolicy">利用規約・プライバシーポリシー</string>
+    <string name="privacypolicyagree"><u>利用規約・プライバシーポリシー</u>\nを確認しました</string>
+    <string name="privacypolicyurl">https://nakajimamasao-appstudio.web.app/ja/privacypolicy.html</string>
     <string name="version">バージョン</string>
     <string name="settingmethod">アプリの設定方法</string>
     <string name="linkcollection">時刻表リンク集</string>
@@ -224,42 +226,82 @@
     <string name="picturebutton">時刻表写真の選択表示</string>
     <string name="timetablehint">0～59[分]を入力：半角スペース区切り</string>
 
-    //
+    //FirebaseAuth
     <string name="account">アカウント</string>
-    <string name="sign_in">ログイン</string>
-    <string name="sign_out">ログアウト</string>
-    <string name="logging_in">ログイン中</string>
-    <string name="logged_out">ログアウト中</string>
-    <string name="signed_out">ログアウトしました</string>
-    <string name="create_account">新規登録</string>
-    <string name="verify_email">アカウント確認</string>
-    <string name="deleteaccount">アカウントの削除</string>
-    <string name="forget_password">パスワードを忘れた場合</string>
-    <string name="reset_password">パスワードをリセットしますか？</string>
-    <string name="sent_reset_mail">再設定メールを送信しました</string>
-    <string name="failed_to_sent_reset_mail">再設定メールを送信できませんでした</string>
-    <string name="sent_authmail">認証メールを送信しました</string>
-    <string name="failed_to_sent_authmail">認証メールを送信できませんでした</string>
-    <string name="auth_mail_check">認証メールを確認してください</string>
-    <string name="created_your_account">アカウントを登録しました</string>
-    <string name="failed_to_creat_account">アカウント登録に失敗しました</string>
-    <string name="delete_your_account">アカウントを削除しました</string>
-    <string name="failed_to_delete_account">アカウント削除に失敗しました</string>
-    <string name="hint_email">Eメールアドレスを入力します</string>
-    <string name="hint_password">パスワードを入力します</string>
-    <string name="auth_successed">ログインしました</string>
-    <string name="auth_failed">ログインに失敗しました</string>
-    <string name="save_data_to_server">サーバーにデータ保存</string>
-    <string name="successed_to_save_data">データ保存に成功しました</string>
-    <string name="failed_to_save_data">データ保存に失敗しました</string>
-    <string name="successed_to_delete_data">データ削除に成功しました</string>
-    <string name="failed_to_delete_data">データ削除に失敗しました</string>
-    <string name="overwirrten_serverdata">サーバーデータが上書きされます。\nよろしいですか？</string>
-    <string name="get_data_from_server">サーバーからデータ取得</string>
-    <string name="successed_to_get_data">データ取得に成功しました</string>
-    <string name="failed_to_get_data">データ取得に失敗しました</string>
-    <string name="overwirrten_byserverdata">サーバーデータを取得します。\nよろしいですか？</string>
-    <string name="signout_your_account_q">ログアウトしますか?</string>
-    <string name="delete_your_account_q">アカウントを削除してもよいですか?</string>
+    <string name="email">Eメールアドレス</string>
+    <string name="password">パスワード</string>
+    <string name="confirmpassword">確認用パスワード</string>
+    <string name="hint_email">Eメールアドレスを入力してください</string>
+    <string name="hint_password">パスワードを入力してください</string>
+    <string name="hint_confirmpassword">確認用パスワードを入力してください</string>
+
+    //Login
+    <string name="login">ログイン</string>
+    <string name="login_successfully">ログインしました</string>
+    <string name="login_error">ログインエラー</string>
+    <string name="not_verified_account">認証が完了していません</string>
+    <string name="auth_mail_check">メールを確認してください</string>
+
+    //Sign Up
+    <string name="create_account">アカウント登録</string>
+    <string name="signup">アカウント登録</string>
+    <string name="signup_successfully">アカウント登録完了</string>
+    <string name="signup_error">アカウント登録エラー</string>
+    <string name="send_auth_mail_error">認証メール送信エラー</string>
+    <string name="send_authmail">認証用メールを送信しますか？</string>
+    <string name="send_auth_mail_successfully">認証メールの送信成功</string>
+    <string name="send_auth_mail_unsuccessfully">認証メールの送信失敗</string>
+
+    //Input Error
+    <string name="incorrect_email">メールアドレスが正しくありません</string>
+    <string name="incorrect_password">パスワードが正しくありません</string>
+    <string name="incorrect_email_or_password">メールアドレスまたはパスワードが正しくありません</string>
+    <string name="incorrect_email_format">メールアドレスの形式が正しくありません</string>
+    <string name="confirmpassword_not_match">確認用パスワードが一致しません</string>
+
+    //Auth Error
+    <string name="email_not_registered">このメールアドレスは登録されていません</string>
+    <string name="account_disabled">このアカウントは無効になっています</string>
+    <string name="email_already_registered">このメールアドレスは登録されています</string>
+    <string name="password_over_6_characters">パスワードは6文字以上にしてください</string>
+
+    //Password Reset
+    <string name="forget_password"><u>パスワードを忘れた場合</u></string>
+    <string name="password_reset">パスワードリセット</string>
+    <string name="password_reset_error">パスワードリセットエラー</string>
+    <string name="reset_password">パスワードを再設定しますか？</string>
+    <string name="send_reset_mail_successfully">パスワード再設定メールの送信成功</string>
+    <string name="send_reset_mail_unsuccessfully">パスワード再設定メールの送信失敗</string>
+
+    //Logout
+    <string name="logout">ログアウト</string>
+    <string name="logout_account">ログアウトしますか？</string>
+    <string name="logged_out">ログアウトしました</string>
+
+    //Delete Account
+    <string name="delete_your_account">アカウント削除</string>
+    <string name="delete_account_error">アカウント削除エラー</string>
+    <string name="delete_account">アカウントを削除しますか？</string>
+    <string name="delete_account_successfully">アカウント削除の成功</string>
+    <string name="delete_account_unsuccessfully">アカウント削除の失敗</string>
+
+    //Obtain data from Firestore
+    <string name="get_saved_data">保存データの取得</string>
+    <string name="overwritten_current_data">現在のデータが上書きされます。\nよろしいですか？</string>
+    <string name="get_data_error">データ取得エラー</string>
+    <string name="get_data_successfully">データ取得の成功</string>
+    <string name="get_data_unsuccessfully">データ取得の失敗</string>
+
+    //Save data to Firestore
+    <string name="save_current_data">データの保存</string>
+    <string name="overwritten_saved_data">保存データが上書きされます。\nよろしいですか？</string>
+    <string name="save_data_error">データ保存エラー</string>
+    <string name="save_data_successfully">データ保存の成功</string>
+    <string name="save_data_unsuccessfully">データ保存の失敗</string>
+
+    //Delete data in Firestore
+    <string name="delete_data_error">データ削除エラー</string>
+    <string name="delete_data_successfully">データ削除の成功</string>
+    <string name="delete_data_unsuccessfully">データ削除の失敗</string>
 
 </resources>

@@ -1,7 +1,10 @@
 package com.example.mytimetablemaker
 
 import android.app.AlertDialog
+import android.content.ContentValues
 import android.content.Context
+import android.util.Log
+import android.view.Gravity
 import android.widget.Toast
 import com.example.mytimetablemaker.Application.Companion.context
 import com.google.android.gms.tasks.Task
@@ -23,66 +26,91 @@ class FirebaseFirestore {
     //サーバーからデータ取得するダイアログの表示
     fun getAlertFirestore(context: Context) {
         AlertDialog.Builder(context).apply {
-            setTitle(R.string.overwirrten_byserverdata.strings)
-            setNegativeButton(R.string.yes) { _, _ -> getFirestore() }
-            setPositiveButton(R.string.no, null)
+            setTitle(R.string.get_saved_data.strings)
+            setMessage(R.string.overwritten_current_data.strings)
+            setNegativeButton(R.string.ok) { _, _ -> getFirestore(context) }
+            setPositiveButton(R.string.cancel, null)
             show()
         }
     }
 
     //サーバーからデータ取得
-    private fun getFirestore() {
+    fun getFirestore(context: Context) {
         (0..3).forEach { i: Int ->
             (0..2).forEach { linenumber: Int ->
                 (0..1).forEach { day: Int ->
                     (4..25).forEach { hour: Int ->
-                        getTimetableFireStore(goorbackarray[i], linenumber, day, hour)
+                        if (!getTimetableFireStore(context, goorbackarray[i], linenumber, day, hour)) {
+                            return
+                        }
                     }
                 }
             }
-            getLineInfoFirestore(goorbackarray[i])
+            if (!getLineInfoFirestore(context, goorbackarray[i])) {
+                return
+            }
         }
+        makeFirestoreToast(R.string.get_data_successfully.strings)
     }
 
     //サーバーから路線データを取得
-    private fun getLineInfoFirestore(goorback: String) {
+    private fun getLineInfoFirestore(context: Context, goorback: String): Boolean {
+        var getfirestoreflag = true
         val userid: String = Firebase.auth.currentUser!!.uid
         val userdb: DocumentReference =  FirebaseFirestore.getInstance().collection("users").document(userid)
         val ref: DocumentReference = userdb.collection("goorback").document(goorback)
         ref.get().addOnCompleteListener { task: Task<DocumentSnapshot> ->
-                if (task.isSuccessful) {
-                    saveLineInfoToPref(goorback, task)
-                    Toast.makeText(context, R.string.successed_to_get_data, Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(context, R.string.failed_to_get_data, Toast.LENGTH_SHORT).show()
-                }
+            if (task.isSuccessful) {
+                saveLineInfoToPref(goorback, task)
+            } else {
+                makeFirestoreAlert(
+                    context,
+                    R.string.get_data_error.strings,
+                    R.string.get_data_unsuccessfully.strings
+                )
+                getfirestoreflag = false
             }
+        }
+        return getfirestoreflag
     }
 
     //サーバーから時刻表データを取得
-    private fun getTimetableFireStore(goorback: String, linenumber: Int, day: Int, hour: Int) {
+    private fun getTimetableFireStore(context: Context, goorback: String, linenumber: Int, day: Int, hour: Int): Boolean {
+        var getfirestoreflag = true
         val userid: String = Firebase.auth.currentUser!!.uid
         val userdb: DocumentReference =  FirebaseFirestore.getInstance().collection("users").document(userid)
         val ref: DocumentReference = userdb.collection("goorback").document(goorback)
         ref.collection("timetable").document("timetable${linenumber + 1}${day.weekDayOrEnd}").get()
             .addOnCompleteListener { task: Task<DocumentSnapshot> ->
                 if (task.isSuccessful) {
-                    val key  ="${goorback}timetable${linenumber + 1}hour${hour.addZeroTime}${day.weekDayOrEnd}"
-                    setting.prefSaveText(context, key, task.taskResult("hour${hour.addZeroTime}", ""))
+                    getEachTimeFirestore(task, goorback, linenumber, day, hour)
+                } else {
+                    makeFirestoreAlert(
+                        context,
+                        R.string.get_data_error.strings,
+                        R.string.get_data_unsuccessfully.strings
+                    )
+                    getfirestoreflag = false
                 }
             }
+        return getfirestoreflag
+    }
+
+    private fun getEachTimeFirestore(task: Task<DocumentSnapshot>, goorback: String, linenumber: Int, day: Int, hour: Int) {
+        val key  ="${goorback}timetable${linenumber + 1}hour${hour.addZeroTime}${day.weekDayOrEnd}"
+        setting.prefSaveText(context, key, task.taskResult("hour${hour.addZeroTime}", ""))
     }
 
     //サインイン時のサーバーデータの取得
-    fun getFirestoreAtSignIn() {
+    fun getFirestoreAtSignIn(context: Context) {
         val userid: String = Firebase.auth.currentUser!!.uid
         val userdb: DocumentReference =  FirebaseFirestore.getInstance().collection("users").document(userid)
         val ref: DocumentReference = userdb.collection("goorback").document("back1")
         ref.get().addOnCompleteListener { task: Task<DocumentSnapshot> ->
                if (task.result?.get("changeline") != null) {
-                   getFirestore()
+                   getFirestore(context)
                } else {
-                   saveFirestore()
+                   saveFirestore(context)
                }
            }
     }
@@ -90,15 +118,16 @@ class FirebaseFirestore {
     //サーバーにデータ保存するダイアログを表示
     fun saveAlertFirestore(context: Context) {
         AlertDialog.Builder(context).apply {
-            setTitle(R.string.overwirrten_serverdata.strings)
-            setNegativeButton(R.string.yes) { _, _ -> saveFirestore() }
-            setPositiveButton(R.string.no, null)
+            setTitle(R.string.save_current_data.strings)
+            setMessage(R.string.overwritten_saved_data.strings)
+            setNegativeButton(R.string.ok) { _, _ -> saveFirestore(context) }
+            setPositiveButton(R.string.cancel, null)
             show()
         }
     }
 
     //サーバーにデータ保存
-    private fun saveFirestore() {
+    private fun saveFirestore(context: Context) {
         val batch: WriteBatch = FirebaseFirestore.getInstance().batch()
         (0..3).forEach { i: Int ->
             (0..2).forEach { linenumber: Int ->
@@ -109,8 +138,16 @@ class FirebaseFirestore {
             saveLineInfoFirestore(goorbackarray[i], batch)
         }
         batch.commit()
-            .addOnSuccessListener { Toast.makeText(context, R.string.successed_to_save_data, Toast.LENGTH_SHORT).show() }
-            .addOnFailureListener { Toast.makeText(context, R.string.failed_to_save_data, Toast.LENGTH_SHORT).show() }
+            .addOnSuccessListener {
+                makeFirestoreToast(R.string.save_data_successfully.strings)
+            }
+            .addOnFailureListener {
+                makeFirestoreAlert(
+                    context,
+                    R.string.save_data_error.strings,
+                    R.string.save_data_unsuccessfully.strings
+                )
+            }
     }
 
     //サーバーに路線データを保存
@@ -152,7 +189,7 @@ class FirebaseFirestore {
 
     //
     private fun setLineInfo(goorback: String): LineInfo{
-        val switch: Boolean = mainview.getRoot2Switch(goorback)
+        val switch: Boolean = mainview.getRoute2Switch(goorback)
         val changeline: String = goorback.changeLine.toString()
         val departpoint: String = goorback.departPoint(R.string.office.strings, R.string.home.strings)
         val arrivalpoint: String = goorback.arrivePoint(R.string.office.strings, R.string.home.strings)
@@ -270,5 +307,24 @@ class FirebaseFirestore {
         val hour24: String = "",
         val hour25: String = ""
     )
+
+    //Toastの表示
+    private fun makeFirestoreToast(message: String) {
+        println(message)
+        Log.d(ContentValues.TAG, message)
+        val ts = Toast.makeText(context, message, Toast.LENGTH_SHORT)
+        ts.setGravity(Gravity.CENTER, 0, 0)
+        ts.show()
+    }
+
+    //Alertの表示
+    private fun makeFirestoreAlert(context: Context, title: String, message: String) {
+        AlertDialog.Builder(context).apply {
+            setTitle(title)
+            setMessage(message)
+            setPositiveButton(R.string.ok, null)
+            show()
+        }
+    }
 }
 

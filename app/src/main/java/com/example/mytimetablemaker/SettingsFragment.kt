@@ -1,6 +1,9 @@
 package com.example.mytimetablemaker
 
+import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.mytimetablemaker.databinding.FragmentSettingsBinding
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -16,7 +20,8 @@ import com.google.firebase.ktx.Firebase
 class SettingsFragment : Fragment() {
 
     //クラスの呼び出し
-    private val emailauth = EmailAuth(Firebase.auth)
+    private var auth: FirebaseAuth = Firebase.auth
+    private val emailauth = EmailAuth(auth)
     private val setting = Setting()
     private val firebasefirestore = FirebaseFirestore()
     private val goorbackarray: Array<String> = arrayOf("back1", "go1", "back2", "go2")
@@ -43,8 +48,8 @@ class SettingsFragment : Fragment() {
             binding.back2settingbutton, binding.go2settingbutton)
 
         //スイッチの状態を表示
-        binding.back2switch.isChecked = MainView().getRoot2Switch("back2")
-        binding.go2switch.isChecked = MainView().getRoot2Switch("go2")
+        binding.back2switch.isChecked = MainView().getRoute2Switch("back2")
+        binding.go2switch.isChecked = MainView().getRoute2Switch("go2")
 
         //スイッチの状態に応じて表示を変更
         binding.back2changelinelayout.isVisible = binding.back2switch.isChecked
@@ -98,25 +103,62 @@ class SettingsFragment : Fragment() {
 
         //サインアウト
         binding.signoutbutton.setOnClickListener {
-            startActivity(emailauth.intentSignOut())
+            logoutAccount(requireContext())
         }
 
         //アカウントの削除
         binding.deleteaccountbutton.setOnClickListener {
-            if (emailauth.intentDeleteAccount(requireContext()) != null ) {
-                startActivity(emailauth.intentDeleteAccount(requireContext()))
-            }
-        }
-
-        //利用規約・プライバシーポリシー
-        binding.privacypolicy.setOnClickListener {
-            startActivity(emailauth.intentPrivacyPolicy())
+            deleteAccount(requireContext())
         }
 
         //バージョンの表示
         binding.versionnumber.text = BuildConfig.VERSION_NAME
         //private val versionCodes: Int = BuildConfig.VERSION_CODE
 
+        //利用規約・プライバシーポリシー
+        binding.privacypolicy.setOnClickListener {
+            startActivity(emailauth.intentPrivacyPolicy())
+        }
+
         return binding.root
+    }
+
+    //ログアウト
+    private fun logoutAccount(context: Context) {
+        AlertDialog.Builder(context).apply {
+            setTitle(R.string.logout.strings)
+            setMessage(R.string.logout_account.strings)
+            setNegativeButton(R.string.ok) { _, _ ->
+                emailauth.afterLogoutAccount()
+                startActivity(emailauth.intentToEmailAuthActivity())
+            }
+            setPositiveButton(R.string.cancel, null)
+            show()
+        }
+    }
+
+    //アカウント削除
+    private fun deleteAccount(context: Context) {
+        AlertDialog.Builder(context).apply {
+            setTitle(R.string.delete_your_account.strings)
+            setMessage(R.string.delete_account.strings)
+            setNegativeButton(R.string.ok) { _, _ ->
+                auth.currentUser?.delete()?.addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        emailauth.afterDeleteAccount()
+                        startActivity(emailauth.intentToEmailAuthActivity())
+                    } else {
+                        Log.d("DeleteAccount", R.string.delete_account_error.strings)
+                        emailauth.makeAuthAlert(
+                            context,
+                            R.string.delete_account_error.strings,
+                            R.string.delete_account_unsuccessfully.strings
+                        )
+                    }
+                }
+            }
+            setPositiveButton(R.string.cancel, null)
+            show()
+        }
     }
 }

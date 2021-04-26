@@ -8,7 +8,7 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentSnapshot
 import java.lang.Boolean.parseBoolean
 
-//Resourcesファイルをどこでも参照できるようにするクラス
+//Resourcesデータをどこでも参照できるようにするクラス
 class Application: android.app.Application() {
     companion object { lateinit var  context: Context }
     override fun onCreate() {
@@ -17,15 +17,15 @@ class Application: android.app.Application() {
     }
 }
 
-//
+//String型Resourcesデータの取得
 val Int.strings: String get() = context.getString(this)
-//
+//StringArray型Resourcesデータの取得
 val Int.arrayStrings: Array<String> get() = context.resources.getStringArray(this)
-//
+//String型Resourcesデータから色データを取得
 val Int.setColor: Int get() = parseColor(this.strings)
-//
+//String?がnullの場合に設定した初期を取得
 fun String?.stringIfNullOrNot(defaultvalue: String): String = when(this) { null -> defaultvalue else -> this }
-//
+//Boolean?がnullの場合にfalseを取得
 val Boolean?.booleanIfNullOrNot: Boolean get() = when(this) { null -> false else -> this }
 //
 fun Task<DocumentSnapshot>.taskResult(key: String, defaultvalue: String) = this.result?.get(key).toString().stringIfNullOrNot(defaultvalue)

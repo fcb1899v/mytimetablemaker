@@ -27,7 +27,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@color/colorAccent"
+                    android:background="@color/colorGray"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -116,7 +116,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@color/colorAccent"
+                    android:background="@color/colorGray"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -288,7 +288,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@color/colorAccent"
+                    android:background="@color/colorGray"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -406,7 +406,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@color/colorAccent"
+                    android:background="@color/colorGray"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -437,7 +437,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
                         android:gravity="start|center_vertical"
-                        android:text="@string/save_data_to_server"
+                        android:text="@string/save_current_data"
                         android:textColor="@color/colorBlack"
                         android:textSize="18sp" />
 
@@ -458,7 +458,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
                         android:gravity="start|center_vertical"
-                        android:text="@string/get_data_from_server"
+                        android:text="@string/get_saved_data"
                         android:textColor="@color/colorBlack"
                         android:textSize="18sp" />
 
@@ -479,7 +479,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
                         android:gravity="start|center_vertical"
-                        android:text="@string/sign_out"
+                        android:text="@string/logout"
                         android:textColor="@color/colorBlack"
                         android:textSize="18sp" />
 
@@ -501,7 +501,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
                         android:gravity="start|center_vertical"
-                        android:text="@string/deleteaccount"
+                        android:text="@string/delete_your_account"
                         android:textColor="@color/colorBlack"
                         android:textSize="18sp" />
 
@@ -518,7 +518,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@color/colorAccent"
+                    android:background="@color/colorGray"
                     android:gravity="center"
                     android:orientation="horizontal">
 

@@ -77,12 +77,12 @@
 
                     <Button
                         android:id="@+id/daybutton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="15dp"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
                         android:layout_marginEnd="15dp"
-                        android:backgroundTint="@color/colorWhite"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/weekbutton"
                         android:fontFamily="sans-serif"
                         android:orientation="horizontal"
                         android:text="@string/weekend"
@@ -914,7 +914,7 @@
                         android:id="@+id/pictureselectbutton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/colorAccent"
+                        android:background="@drawable/onbutton"
                         android:gravity="center"
                         android:orientation="horizontal"
                         android:paddingStart="20dp"
@@ -961,9 +961,12 @@
 
                     <ImageView
                         android:id="@+id/PictureView"
-                        android:layout_width="360dp"
-                        android:layout_height="640dp"
-                        ads:srcCompat="@android:drawable/screen_background_light"
+                        android:layout_width="match_parent"
+                        android:layout_height="600dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+
+                        ads:srcCompat="@drawable/weekbutton"
                         tools:ignore="ContentDescription" />
 
                     <View
